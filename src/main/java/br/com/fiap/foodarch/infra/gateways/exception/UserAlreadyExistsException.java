@@ -1,7 +1,7 @@
-package br.com.fiap.foodarch.application.usecases.exception;
+package br.com.fiap.foodarch.infra.gateways.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
-  public UserAlreadyExistsException(String message) {
-    super(message);
+  public UserAlreadyExistsException(String defaultMessage) {
+    super(defaultMessage);
   }
 }
