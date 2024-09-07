@@ -2,9 +2,7 @@ package br.com.fiap.foodarch.infra.gateways;
 
 import br.com.fiap.foodarch.domain.entities.user.User;
 import br.com.fiap.foodarch.infra.gateways.entities.UserEntity;
-import org.springframework.stereotype.Component;
 
-@Component
 public class UserEntityMapper {
 
   public UserEntity toEntity(User user) {

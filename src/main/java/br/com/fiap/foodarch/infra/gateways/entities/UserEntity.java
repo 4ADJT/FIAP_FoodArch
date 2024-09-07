@@ -24,10 +24,12 @@ public class UserEntity {
 
   private String name;
 
+  @Column(unique = true, updatable = false, nullable = false)
   private String email;
 
   private LocalDate birthdate;
 
+  @Column(unique = true, updatable = false, nullable = false)
   private String cpf;
 
   @CreationTimestamp

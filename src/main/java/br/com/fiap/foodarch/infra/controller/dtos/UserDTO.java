@@ -26,5 +26,6 @@ public record UserDTO(
     @NotEmpty(message = "CPF should not be empty")
     @CPF(message = "CPF should be valid.")
     String cpf
+
 ) {
 }
