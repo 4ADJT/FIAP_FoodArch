@@ -7,6 +7,7 @@ import br.com.fiap.foodarch.infra.gateways.exception.UserAlreadyExistsException;
 import br.com.fiap.foodarch.infra.gateways.exception.UserNotExistsException;
 import br.com.fiap.foodarch.infra.persistance.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class JpaUserRepository implements UserRepository {
         List<User> alreadyExists = this.findByEmailOrCpf(userEntity.getEmail(), userEntity.getCpf());
 
         if(!alreadyExists.isEmpty()) {
-            throw new UserAlreadyExistsException("User already exists.");
+            throw new UserAlreadyExistsException("User already exists.", HttpStatus.BAD_REQUEST);
         }
 
         userEntity = repository.save(userEntity);
@@ -54,6 +55,7 @@ public class JpaUserRepository implements UserRepository {
 
     @Override
     public List<User> findByEmailOrCpf(String email, String cpf) {
+
         List<UserEntity> users = repository.findByEmailOrCpf(email, cpf);
 
         Stream<User> userStream = users.stream().map(mapper::toDomain);
@@ -64,16 +66,18 @@ public class JpaUserRepository implements UserRepository {
 
     @Override
     public User updateUser(User user) {
-        UserEntity users = repository.findByEmailOrCpf(user.getEmail(), user.getCpf()).get(0);
+        List<UserEntity> users = repository.findByEmailOrCpf(user.getEmail(), user.getCpf());
 
-        if(users == null) {
-            throw new UserNotExistsException("User not found.");
+        if(users.isEmpty()) {
+            throw new UserNotExistsException("User not found.", HttpStatus.BAD_REQUEST);
         }
 
-        users.setBirthdate(user.getBirthdate());
-        users.setName(user.getName());
+        UserEntity selectUser = users.get(0);
 
-        UserEntity userUpdated = repository.save(users);
+        selectUser.setBirthdate(user.getBirthdate());
+        selectUser.setName(user.getName());
+
+        UserEntity userUpdated = repository.save(selectUser);
 
         return mapper.toDomain(userUpdated);
 

@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.config.injectable;
+package br.com.fiap.foodarch.infra.config.injectable;
 
 import br.com.fiap.foodarch.application.gateways.UserRepository;
 import br.com.fiap.foodarch.application.usecases.CreateUser;
