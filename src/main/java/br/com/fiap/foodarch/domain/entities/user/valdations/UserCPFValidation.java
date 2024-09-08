@@ -1,19 +1,22 @@
 package br.com.fiap.foodarch.domain.entities.user.valdations;
 
+import br.com.fiap.foodarch.domain.entities.user.valdations.exception.ValidationErrorException;
+import org.springframework.http.HttpStatus;
+
 public class UserCPFValidation {
     public static String isValid(String cpf) {
       if(cpf == null) {
-        throw new IllegalArgumentException("CPF cannot be null.");
+        throw new ValidationErrorException("CPF cannot be null.", HttpStatus.BAD_REQUEST);
       }
 
       if (cpf.isBlank() || cpf.isEmpty()) {
-        throw new IllegalArgumentException("CPF cannot be empty.");
+        throw new ValidationErrorException("CPF cannot be empty.", HttpStatus.BAD_REQUEST);
       }
 
       cpf = cpf.replaceAll("\\D", "").trim();
 
       if (cpf.length() != 11) {
-        throw new IllegalArgumentException("CPF should have 11 characters.");
+        throw new ValidationErrorException("CPF should have 11 characters.", HttpStatus.BAD_REQUEST);
       }
 
       return cpf;
@@ -49,7 +52,7 @@ public class UserCPFValidation {
         secondVerifier == Character.getNumericValue(cpf.charAt(10));
 
     if(!isValid) {
-      throw new IllegalArgumentException("CPF is not valid.");
+      throw new ValidationErrorException("CPF is not valid.", HttpStatus.BAD_REQUEST);
     }
 
     return true;

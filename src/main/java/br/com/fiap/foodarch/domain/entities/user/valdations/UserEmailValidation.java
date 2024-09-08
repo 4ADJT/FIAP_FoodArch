@@ -1,5 +1,8 @@
 package br.com.fiap.foodarch.domain.entities.user.valdations;
 
+import br.com.fiap.foodarch.domain.entities.user.valdations.exception.ValidationErrorException;
+import org.springframework.http.HttpStatus;
+
 import java.util.regex.Pattern;
 
 public class UserEmailValidation {
@@ -8,11 +11,11 @@ public class UserEmailValidation {
 
   public static boolean isValidEmail(String email) {
     if(email == null || email.isEmpty()) {
-      throw new IllegalArgumentException("Email cannot be null or empty");
+      throw new ValidationErrorException("Email cannot be null or empty",HttpStatus.BAD_REQUEST);
     }
 
     if (!pattern.matcher(email).matches()) {
-      throw new IllegalArgumentException("Invalid email");
+      throw new ValidationErrorException("Invalid email", HttpStatus.BAD_REQUEST);
     }
 
     return true;
