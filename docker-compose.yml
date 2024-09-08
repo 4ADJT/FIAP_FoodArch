@@ -1,0 +1,50 @@
+services:
+
+  dbpostgres:
+    image: postgres
+    container_name: dbpostgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=foodarch
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d foodarch" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    networks:
+      - foodarch
+
+  foodarch_app:
+    container_name: foodarch
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    links:
+      - dbpostgres
+    environment:
+      - DATASOURCE_URL=jdbc:postgresql://dbpostgres:5432/foodarch
+      - DATASOURCE_USERNAME=postgres
+      - DATASOURCE_PASSWORD=postgres
+      - SERVER_PORT=8080
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    depends_on:
+      dbpostgres:
+        condition: service_healthy
+    networks:
+      - foodarch
+
+networks:
+  foodarch:
+    driver: bridge
