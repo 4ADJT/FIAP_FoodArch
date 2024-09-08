@@ -14,9 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @ControllerAdvice
@@ -24,45 +22,18 @@ public class GlobalExceptionHandler {
 
   private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-  @ExceptionHandler(ResourceNotFoundException.class)
-  public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+  @ExceptionHandler({ResourceNotFoundException.class, NoResourceFoundException.class, NoHandlerFoundException.class})
+  public ResponseEntity<Object> handleNotFoundExceptions(Exception ex, WebRequest request) {
     HttpStatus status = HttpStatus.NOT_FOUND;
     Map<String, Object> body = new HashMap<>();
     body.put("timestamp", LocalDateTime.now());
-    body.put("message", "Resource not found.");
+    body.put("message", ex instanceof NoHandlerFoundException ?
+        "No handler found for this request." : "Resource not found.");
     body.put("details", ex.getMessage());
     body.put("path", ((ServletWebRequest) request).getRequest().getRequestURI());
     body.put("status", status.value());
 
-    logger.warn("Resource not found: {}", ex.getMessage());
-    return new ResponseEntity<>(body, status);
-  }
-
-  @ExceptionHandler(NoResourceFoundException.class)
-  public ResponseEntity<Object> handleNoResourceFoundException(NoResourceFoundException ex, WebRequest request) {
-    HttpStatus status = HttpStatus.NOT_FOUND;
-    Map<String, Object> body = new HashMap<>();
-    body.put("timestamp", LocalDateTime.now());
-    body.put("message", "No resource found for this request.");
-    body.put("details", ex.getMessage());
-    body.put("path", ((ServletWebRequest) request).getRequest().getRequestURI());
-    body.put("status", status.value());
-
-    logger.warn("No resource found: {}", ex.getMessage());
-    return new ResponseEntity<>(body, status);
-  }
-
-  @ExceptionHandler(NoHandlerFoundException.class)
-  public ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, WebRequest request) {
-    HttpStatus status = HttpStatus.NOT_FOUND;
-    Map<String, Object> body = new HashMap<>();
-    body.put("timestamp", LocalDateTime.now());
-    body.put("message", "No handler found for this request.");
-    body.put("details", ex.getMessage());
-    body.put("path", ((ServletWebRequest) request).getRequest().getRequestURI());
-    body.put("status", status.value());
-
-    logger.warn("No handler found: {}", ex.getMessage());
+    logger.warn("Not found exception: {}", ex.getMessage());
     return new ResponseEntity<>(body, status);
   }
 
@@ -94,9 +65,10 @@ public class GlobalExceptionHandler {
       if (HttpStatus.class.isAssignableFrom(getStatusMethod.getReturnType())) {
         status = (HttpStatus) getStatusMethod.invoke(ex);
       }
-    } catch (NoSuchMethodException | SecurityException ignored) {
+    } catch (NoSuchMethodException | SecurityException e) {
+      logger.debug("Status method not found or inaccessible: {}", e.getMessage());
     } catch (Exception e) {
-      logger.error("Unexpected error while handling exception: {}", e.getMessage(), e);
+      logger.error("Error while extracting status: {}", e.getMessage(), e);
     }
 
     Map<String, Object> body = new HashMap<>();
@@ -105,17 +77,6 @@ public class GlobalExceptionHandler {
     body.put("details", ex.getMessage());
     body.put("path", ((ServletWebRequest) request).getRequest().getRequestURI());
     body.put("status", status.value());
-
-    String originatingClass = ex.getStackTrace().length > 0 ? ex.getStackTrace()[0].getClassName() : "Unknown";
-    body.put("originatingClass", originatingClass);
-
-    List<String> exceptionChain = new ArrayList<>();
-    Throwable currentException = ex;
-    while (currentException != null) {
-      exceptionChain.add(currentException.getClass().getName());
-      currentException = currentException.getCause();
-    }
-    body.put("exceptionChain", exceptionChain);
 
     logger.error("Exception occurred: {}", ex.getMessage(), ex);
     return new ResponseEntity<>(body, status);
