@@ -23,7 +23,7 @@ services:
     container_name: foodarch
     restart: always
     build:
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     ports:
       - 8080:8080
     links:
