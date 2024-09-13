@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.application.exceptions;
+package br.com.fiap.foodarch.domain.exceptions;
 
 import org.springframework.http.HttpStatus;
 

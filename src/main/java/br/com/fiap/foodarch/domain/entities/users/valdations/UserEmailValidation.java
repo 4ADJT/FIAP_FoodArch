@@ -1,6 +1,6 @@
 package br.com.fiap.foodarch.domain.entities.users.valdations;
 
-import br.com.fiap.foodarch.application.exceptions.ValidationErrorException;
+import br.com.fiap.foodarch.domain.exceptions.ValidationErrorException;
 import org.springframework.http.HttpStatus;
 
 import java.util.regex.Pattern;

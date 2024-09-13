@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.infra.controller;
+package br.com.fiap.foodarch.application.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;

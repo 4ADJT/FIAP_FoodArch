@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.infra.presenters.users;
+package br.com.fiap.foodarch.application.presenters.users;
 
 import br.com.fiap.foodarch.domain.entities.users.User;
 import br.com.fiap.foodarch.domain.records.users.UserOutput;

@@ -1,9 +1,9 @@
 package br.com.fiap.foodarch.infra.external.users;
 
-import br.com.fiap.foodarch.application.interfaces.users.UserRepository;
+import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.users.User;
-import br.com.fiap.foodarch.application.exceptions.UserAlreadyExistsException;
-import br.com.fiap.foodarch.application.exceptions.UserNotExistsException;
+import br.com.fiap.foodarch.domain.exceptions.UserAlreadyExistsException;
+import br.com.fiap.foodarch.domain.exceptions.UserNotExistsException;
 import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

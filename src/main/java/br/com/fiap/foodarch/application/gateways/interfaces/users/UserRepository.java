@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.application.interfaces.users;
+package br.com.fiap.foodarch.application.gateways.interfaces.users;
 
 import br.com.fiap.foodarch.domain.entities.users.User;
 

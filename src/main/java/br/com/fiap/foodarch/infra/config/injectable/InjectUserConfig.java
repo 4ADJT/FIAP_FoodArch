@@ -1,13 +1,13 @@
 package br.com.fiap.foodarch.infra.config.injectable;
 
-import br.com.fiap.foodarch.application.interfaces.users.UserRepository;
-import br.com.fiap.foodarch.application.usecases.users.CreateUser;
-import br.com.fiap.foodarch.application.usecases.users.ListUsers;
-import br.com.fiap.foodarch.application.usecases.users.UpdateUser;
+import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
+import br.com.fiap.foodarch.domain.usecases.users.CreateUser;
+import br.com.fiap.foodarch.domain.usecases.users.ListUsers;
+import br.com.fiap.foodarch.domain.usecases.users.UpdateUser;
 import br.com.fiap.foodarch.domain.entities.users.UserFactory;
-import br.com.fiap.foodarch.infra.controller.users.CreateUserController;
-import br.com.fiap.foodarch.infra.controller.users.GetAllUsersController;
-import br.com.fiap.foodarch.infra.controller.users.UpdateUserController;
+import br.com.fiap.foodarch.application.controller.users.CreateUserController;
+import br.com.fiap.foodarch.application.controller.users.GetAllUsersController;
+import br.com.fiap.foodarch.application.controller.users.UpdateUserController;
 import br.com.fiap.foodarch.infra.external.users.JpaUserRepository;
 import br.com.fiap.foodarch.infra.external.users.UserEntityMapper;
 import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;

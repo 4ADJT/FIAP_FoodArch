@@ -1,11 +1,10 @@
-package br.com.fiap.foodarch.infra.controller.users;
+package br.com.fiap.foodarch.application.controller.users;
 
-import br.com.fiap.foodarch.application.usecases.users.CreateUser;
-import br.com.fiap.foodarch.application.usecases.users.UpdateUser;
+import br.com.fiap.foodarch.domain.usecases.users.CreateUser;
 import br.com.fiap.foodarch.domain.entities.users.User;
 import br.com.fiap.foodarch.domain.records.users.UserInput;
 import br.com.fiap.foodarch.domain.records.users.UserOutput;
-import br.com.fiap.foodarch.infra.presenters.users.UserPresenter;
+import br.com.fiap.foodarch.application.presenters.users.UserPresenter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

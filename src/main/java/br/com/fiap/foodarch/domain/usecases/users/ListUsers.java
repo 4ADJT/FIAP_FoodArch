@@ -1,6 +1,6 @@
-package br.com.fiap.foodarch.application.usecases.users;
+package br.com.fiap.foodarch.domain.usecases.users;
 
-import br.com.fiap.foodarch.application.interfaces.users.UserRepository;
+import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.users.User;
 
 import java.util.List;

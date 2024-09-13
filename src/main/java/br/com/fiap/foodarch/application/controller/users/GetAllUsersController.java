@@ -1,6 +1,8 @@
-package br.com.fiap.foodarch.infra.controller.users;
+package br.com.fiap.foodarch.application.controller.users;
 
-import br.com.fiap.foodarch.application.usecases.users.ListUsers;
+import br.com.fiap.foodarch.application.presenters.users.UserPresenter;
+import br.com.fiap.foodarch.domain.records.users.UserOutput;
+import br.com.fiap.foodarch.domain.usecases.users.ListUsers;
 import br.com.fiap.foodarch.domain.entities.users.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/users")
@@ -26,11 +29,18 @@ public class GetAllUsersController {
 
   @GetMapping
   @Operation(summary = "List user's", description = "List all users from FoodArch.")
-  public ResponseEntity<List<User>> getUsers() {
+  public ResponseEntity<List<UserOutput>> getUsers() {
 
-    return listUsers.execute().isEmpty()
-        ? ResponseEntity.noContent().build()
-        : ResponseEntity.ok(listUsers.execute());
+   if(listUsers.execute().isEmpty()) {
+      return ResponseEntity.noContent().build();
+    }
+
+    Stream<User> list = listUsers.execute().stream();
+
+    List<UserOutput> response = list.map(UserPresenter::userResponse).toList();
+
+    return ResponseEntity.ok(response);
+
   }
 
 }

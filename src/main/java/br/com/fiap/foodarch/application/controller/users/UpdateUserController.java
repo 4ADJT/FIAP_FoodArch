@@ -1,6 +1,8 @@
-package br.com.fiap.foodarch.infra.controller.users;
+package br.com.fiap.foodarch.application.controller.users;
 
-import br.com.fiap.foodarch.application.usecases.users.UpdateUser;
+import br.com.fiap.foodarch.application.presenters.users.UserPresenter;
+import br.com.fiap.foodarch.domain.records.users.UserOutput;
+import br.com.fiap.foodarch.domain.usecases.users.UpdateUser;
 import br.com.fiap.foodarch.domain.entities.users.User;
 import br.com.fiap.foodarch.domain.records.users.UserInput;
 
@@ -10,12 +12,10 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/users")
 @Tag(name = "Users")
 public class UpdateUserController {
-
 
   private final UpdateUser updateUser;
 
@@ -23,21 +23,18 @@ public class UpdateUserController {
 
       UpdateUser updateUser
   ) {
-
     this.updateUser = updateUser;
-
   }
-
-
-
 
   @PutMapping
   @Operation(summary = "Update user", description = "Update user from FoodArch.")
-  public ResponseEntity<User> updateUser(@Valid @RequestBody UserInput userInput) {
+  public ResponseEntity<UserOutput> updateUser(@Valid @RequestBody UserInput userInput) {
 
     User user = updateUser.execute(userInput);
 
-    return ResponseEntity.status(201).body(user);
+    UserOutput response = UserPresenter.userResponse(user);
+
+    return ResponseEntity.status(201).body(response);
   }
 
 }
