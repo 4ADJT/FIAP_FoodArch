@@ -1,5 +1,6 @@
 package br.com.fiap.foodarch.domain.entities.users;
 
+import br.com.fiap.foodarch.domain.entities.users.valdations.UserBirthdateValidation;
 import br.com.fiap.foodarch.domain.entities.users.valdations.UserCPFValidation;
 import br.com.fiap.foodarch.domain.entities.users.valdations.UserEmailValidation;
 import jakarta.persistence.PrePersist;
@@ -34,8 +35,8 @@ public class User {
 
       cpf = UserCPFValidation.isValid(cpf);
       UserCPFValidation.calculatedCPFIsValid(cpf);
-
       UserEmailValidation.isValidEmail(email);
+      UserBirthdateValidation.isValidBirthdate(birthdate);
 
       this.name = name;
       this.email = email;
