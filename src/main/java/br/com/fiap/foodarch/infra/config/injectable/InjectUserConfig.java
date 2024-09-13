@@ -1,14 +1,16 @@
 package br.com.fiap.foodarch.infra.config.injectable;
 
-import br.com.fiap.foodarch.application.gateways.UserRepository;
-import br.com.fiap.foodarch.application.usecases.CreateUser;
-import br.com.fiap.foodarch.application.usecases.ListUsers;
-import br.com.fiap.foodarch.application.usecases.UpdateUser;
-import br.com.fiap.foodarch.domain.entities.user.UserFactory;
-import br.com.fiap.foodarch.infra.controller.UserController;
-import br.com.fiap.foodarch.infra.gateways.JpaUserRepository;
-import br.com.fiap.foodarch.infra.gateways.UserEntityMapper;
-import br.com.fiap.foodarch.infra.persistance.IUserRepository;
+import br.com.fiap.foodarch.application.interfaces.users.UserRepository;
+import br.com.fiap.foodarch.application.usecases.users.CreateUser;
+import br.com.fiap.foodarch.application.usecases.users.ListUsers;
+import br.com.fiap.foodarch.application.usecases.users.UpdateUser;
+import br.com.fiap.foodarch.domain.entities.users.UserFactory;
+import br.com.fiap.foodarch.infra.controller.users.CreateUserController;
+import br.com.fiap.foodarch.infra.controller.users.GetAllUsersController;
+import br.com.fiap.foodarch.infra.controller.users.UpdateUserController;
+import br.com.fiap.foodarch.infra.external.users.JpaUserRepository;
+import br.com.fiap.foodarch.infra.external.users.UserEntityMapper;
+import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -46,8 +48,18 @@ public class InjectUserConfig {
   }
 
   @Bean
-  UserController userController(CreateUser createUser, UpdateUser updateUser, ListUsers listUsers) {
-    return new UserController(createUser, updateUser, listUsers);
+  UpdateUserController updateUserController(UpdateUser updateUser) {
+    return new UpdateUserController(updateUser);
+  }
+
+  @Bean
+  GetAllUsersController getAllUsersController(ListUsers listUsers) {
+    return new GetAllUsersController(listUsers);
+  }
+
+  @Bean
+  CreateUserController createUserController(CreateUser createUser) {
+    return new CreateUserController(createUser);
   }
 
 }

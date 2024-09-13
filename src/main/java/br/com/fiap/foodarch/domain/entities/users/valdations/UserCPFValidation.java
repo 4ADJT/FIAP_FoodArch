@@ -1,6 +1,6 @@
-package br.com.fiap.foodarch.domain.entities.user.valdations;
+package br.com.fiap.foodarch.domain.entities.users.valdations;
 
-import br.com.fiap.foodarch.domain.entities.user.valdations.exception.ValidationErrorException;
+import br.com.fiap.foodarch.application.exceptions.ValidationErrorException;
 import org.springframework.http.HttpStatus;
 
 public class UserCPFValidation {

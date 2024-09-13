@@ -1,7 +1,7 @@
-package br.com.fiap.foodarch.domain.entities.user;
+package br.com.fiap.foodarch.domain.entities.users;
 
-import br.com.fiap.foodarch.domain.entities.user.valdations.UserCPFValidation;
-import br.com.fiap.foodarch.domain.entities.user.valdations.UserEmailValidation;
+import br.com.fiap.foodarch.domain.entities.users.valdations.UserCPFValidation;
+import br.com.fiap.foodarch.domain.entities.users.valdations.UserEmailValidation;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.*;

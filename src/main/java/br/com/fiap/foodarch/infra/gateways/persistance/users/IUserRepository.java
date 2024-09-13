@@ -1,6 +1,6 @@
-package br.com.fiap.foodarch.infra.persistance;
+package br.com.fiap.foodarch.infra.gateways.persistance.users;
 
-import br.com.fiap.foodarch.infra.gateways.entities.UserEntity;
+import br.com.fiap.foodarch.infra.external.users.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

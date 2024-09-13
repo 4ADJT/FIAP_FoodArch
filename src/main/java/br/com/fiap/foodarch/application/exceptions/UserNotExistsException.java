@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.infra.gateways.exception;
+package br.com.fiap.foodarch.application.exceptions;
 
 import org.springframework.http.HttpStatus;
 

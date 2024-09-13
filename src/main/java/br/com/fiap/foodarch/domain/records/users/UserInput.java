@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.infra.controller.dtos;
+package br.com.fiap.foodarch.domain.records.users;
 
 import jakarta.validation.constraints.*;
 
@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
-public record UserDTO(
+public record UserInput(
 
     @NotNull(message = "Name should not be null")
     @NotEmpty(message = "Name should not be empty")

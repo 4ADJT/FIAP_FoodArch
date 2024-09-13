@@ -1,7 +1,6 @@
-package br.com.fiap.foodarch.infra.gateways;
+package br.com.fiap.foodarch.infra.external.users;
 
-import br.com.fiap.foodarch.domain.entities.user.User;
-import br.com.fiap.foodarch.infra.gateways.entities.UserEntity;
+import br.com.fiap.foodarch.domain.entities.users.User;
 
 public class UserEntityMapper {
 

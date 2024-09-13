@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.infra.gateways.entities;
+package br.com.fiap.foodarch.infra.external.users;
 
 import jakarta.persistence.*;
 import lombok.*;

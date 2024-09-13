@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.domain.entities.user;
+package br.com.fiap.foodarch.domain.entities.users;
 
 import java.time.LocalDate;
 
