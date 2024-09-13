@@ -5,7 +5,12 @@ import br.com.fiap.foodarch.domain.records.users.UserOutput;
 import br.com.fiap.foodarch.domain.usecases.users.ListUsers;
 import br.com.fiap.foodarch.domain.entities.users.User;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.SchemaProperties;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,17 +34,16 @@ public class GetAllUsersController {
 
   @GetMapping
   @Operation(summary = "List user's", description = "List all users from FoodArch.")
-  public ResponseEntity<List<UserOutput>> getUsers() {
+  public ResponseEntity<Page<UserOutput>> getUsers(
+      @ParameterObject
+      @PageableDefault(size = 10, page = 0) Pageable pageable
+  ) {
 
-   if(listUsers.execute().isEmpty()) {
-      return ResponseEntity.noContent().build();
-    }
+    Page<User> list = listUsers.execute(pageable);
 
-    Stream<User> list = listUsers.execute().stream();
+    Page<UserOutput> output = list.map(UserPresenter::userResponse);
 
-    List<UserOutput> response = list.map(UserPresenter::userResponse).toList();
-
-    return ResponseEntity.ok(response);
+    return ResponseEntity.ok(output);
 
   }
 

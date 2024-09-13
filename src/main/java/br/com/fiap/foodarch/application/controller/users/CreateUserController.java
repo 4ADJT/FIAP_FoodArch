@@ -28,7 +28,7 @@ public class CreateUserController {
 
   @PostMapping
   @Operation(summary = "Create user", description = "Create new user to FoodArch.")
-  public ResponseEntity<Object> createUser(@Valid @RequestBody UserInput userInput) {
+  public ResponseEntity<UserOutput> createUser(@Valid @RequestBody UserInput userInput) {
 
     User user = createUser.execute(userInput);
 

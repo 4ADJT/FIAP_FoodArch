@@ -6,6 +6,8 @@ import br.com.fiap.foodarch.domain.exceptions.UserAlreadyExistsException;
 import br.com.fiap.foodarch.domain.exceptions.UserNotExistsException;
 import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
@@ -44,11 +46,10 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public List<User> listUsers() {
-        List<UserEntity> users = repository.findAll();
-        Stream<User> userStream = users.stream().map(mapper::toDomain);
+    public Page<User> listUsers(Pageable pageable) {
+        Page<UserEntity> users = this.repository.findAll(pageable);
 
-        return userStream.toList();
+        return users.map(mapper::toDomain);
 
     }
 

@@ -2,6 +2,8 @@ package br.com.fiap.foodarch.domain.usecases.users;
 
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.users.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class ListUsers {
     this.repository = repository;
   }
 
-  public List<User> execute() {
-    return repository.listUsers();
+  public Page<User> execute(Pageable pageable) {
+    return repository.listUsers(pageable);
   }
 }
