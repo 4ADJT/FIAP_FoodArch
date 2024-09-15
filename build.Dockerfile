@@ -1,14 +1,18 @@
 # Dockerfile
 
 # Etapa 1: Build da aplicação usando a imagem oficial do Maven com OpenJDK 17
-FROM maven:3.8.6-openjdk-17 AS builder
+FROM maven:3.8.6-openjdk-17-slim AS builder
 
 WORKDIR /app
 
+# Copiar o arquivo pom.xml e baixar dependências
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
+# Copiar o código fonte da aplicação
 COPY src ./src
+
+# Compilar e empacotar a aplicação, pulando os testes
 RUN mvn clean package -DskipTests
 
 # Etapa 2: Configuração da imagem final para execução
