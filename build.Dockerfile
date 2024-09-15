@@ -1,4 +1,4 @@
-# Dockerfile
+# Build
 
 # Etapa 1: Build da aplicação usando Maven e OpenJDK 17
 FROM ubuntu:20.04 AS builder
@@ -54,8 +54,19 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 # Copiar o arquivo de configuração do Supervisord
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Criar diretórios de log para a aplicação Java
+RUN mkdir -p /var/log/java && \
+    chown -R root:root /var/log/java
+
+# Copiar o supervisord.conf para definir o proprietário dos logs
+# (se necessário, ajustar permissões adicionais)
+
 # Criar um usuário não-root para execução
 RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
+
+# Alterar propriedade dos diretórios de log para appuser
+RUN chown -R appuser:appgroup /var/log/nginx && \
+    chown -R appuser:appgroup /var/log/java
 
 # Alterar para o usuário não-root
 USER appuser
