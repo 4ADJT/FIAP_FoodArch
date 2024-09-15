@@ -1,8 +1,19 @@
 # Dockerfile
 
-# Etapa 1: Build da aplicação usando a imagem oficial do Maven com OpenJDK 17
-FROM maven:3.8.6-openjdk-17-slim AS builder
+# Etapa 1: Build da aplicação usando Ubuntu com OpenJDK 17 e Maven instalados
+FROM ubuntu:20.04 AS builder
 
+# Evitar interações durante a instalação de pacotes
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Atualizar e instalar dependências
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y openjdk-17-jdk maven curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Definir diretório de trabalho
 WORKDIR /app
 
 # Copiar o arquivo pom.xml e baixar dependências
@@ -15,7 +26,7 @@ COPY src ./src
 # Compilar e empacotar a aplicação, pulando os testes
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Configuração da imagem final para execução
+# Etapa 2: Configuração da imagem final para execução usando Ubuntu
 FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -46,12 +57,13 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Criar diretórios de log
-RUN mkdir -p /var/log/supervisor /var/log/java /var/log/nginx
+RUN mkdir -p /var/log/supervisor /var/log/java /var/log/nginx /var/cache/nginx
 
-# Ajustar permissões dos diretórios de log
+# Ajustar permissões dos diretórios de log e cache
 RUN chown -R root:root /var/log/supervisor && \
     chown -R appuser:appgroup /var/log/java && \
-    chown -R appuser:appgroup /var/log/nginx
+    chown -R appuser:appgroup /var/log/nginx && \
+    chown -R appuser:appgroup /var/cache/nginx
 
 # Expor a porta 80 (Nginx)
 EXPOSE 80
