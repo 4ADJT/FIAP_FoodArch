@@ -1,6 +1,6 @@
 services:
   dbpostgres:
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -30,6 +30,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
 
   app:
+    container_name: foodarch
     build:
       context: .
       dockerfile: Dockerfile
@@ -41,15 +42,11 @@ services:
       DATASOURCE_USERNAME: postgres
       DATASOURCE_PASSWORD: postgres
       SERVER_PORT: 8080
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/actuator/health"]
-      interval: 20s
-      timeout: 15s
-      retries: 5
-      start_period: 120s
     depends_on:
-      - dbpostgres
-      - nginx
+      dbpostgres:
+        condition: service_healthy
+      nginx:
+        condition: service_started
     networks:
       - foodarch
 
