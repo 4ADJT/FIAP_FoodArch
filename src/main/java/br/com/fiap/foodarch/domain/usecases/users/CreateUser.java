@@ -2,16 +2,16 @@ package br.com.fiap.foodarch.domain.usecases.users;
 
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.users.User;
-import br.com.fiap.foodarch.domain.entities.users.UserFactory;
+import br.com.fiap.foodarch.domain.entities.users.CreateUserFactory;
 import br.com.fiap.foodarch.domain.records.users.UserInput;
 
 public class CreateUser {
     private final UserRepository repository;
-    private final UserFactory factory;
+    private final CreateUserFactory factory;
 
     public CreateUser(
         UserRepository repository,
-        UserFactory factory
+        CreateUserFactory factory
     ) {
         this.repository = repository;
         this.factory = factory;

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 @Repository
@@ -66,21 +67,24 @@ public class JpaUserRepository implements UserRepository {
 
     @Override
     public User updateUser(User user) {
-        List<UserEntity> users = repository.findByEmailOrCpf(user.getEmail(), user.getCpf());
 
-        if(users.isEmpty()) {
-            throw new UserNotExistsException("User not found.", HttpStatus.BAD_REQUEST);
-        }
+        user.setBirthdate(user.getBirthdate());
+        user.setName(user.getName());
 
-        UserEntity selectUser = users.get(0);
+        UserEntity userEntity = mapper.toEntity(user);
 
-        selectUser.setBirthdate(user.getBirthdate());
-        selectUser.setName(user.getName());
-
-        UserEntity userUpdated = repository.save(selectUser);
+        UserEntity userUpdated = repository.save(userEntity);
 
         return mapper.toDomain(userUpdated);
+    }
 
+    @Override
+    public User findById(UUID id) {
+        UserEntity user = this.repository.findById(id).orElseThrow(
+            () -> new UserNotExistsException("User not found.", HttpStatus.BAD_REQUEST)
+        );
+
+        return mapper.toDomain(user);
     }
 
 }

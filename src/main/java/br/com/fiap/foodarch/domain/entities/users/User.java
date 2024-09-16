@@ -8,6 +8,7 @@ import jakarta.persistence.PreUpdate;
 import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -30,10 +31,12 @@ public class User {
 
    private LocalDateTime updatedAt;
 
-   @Builder(builderClassName = "UserBuilder")
+   @Builder(builderClassName = "CreateUserBuilder")
    public User(String name, String email, String cpf, LocalDate birthdate) {
 
-      cpf = UserCPFValidation.isValid(cpf);
+      cpf = cpf.replaceAll("\\D", "").trim();
+
+      UserCPFValidation.isValid(cpf);
       UserCPFValidation.calculatedCPFIsValid(cpf);
       UserEmailValidation.isValidEmail(email);
       UserBirthdateValidation.isValidBirthdate(birthdate);
@@ -42,6 +45,25 @@ public class User {
       this.email = email;
       this.birthdate = birthdate;
       this.cpf = cpf;
+   }
+
+   @Builder(builderClassName = "UpdateUserBuilder")
+   public User(UUID id, String name, String email, String cpf, LocalDate birthdate, LocalDateTime createdAt) {
+
+      cpf = cpf.replaceAll("\\D", "").trim();
+
+      UserCPFValidation.isValid(cpf);
+      UserCPFValidation.calculatedCPFIsValid(cpf);
+      UserEmailValidation.isValidEmail(email);
+      UserBirthdateValidation.isValidBirthdate(birthdate);
+
+      this.id = id;
+      this.name = name;
+      this.email = email;
+      this.birthdate = birthdate;
+      this.cpf = cpf;
+      this.createdAt = createdAt;
+
    }
 
    @PrePersist

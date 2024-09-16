@@ -9,8 +9,11 @@ import br.com.fiap.foodarch.domain.records.users.UserInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -26,11 +29,15 @@ public class UpdateUserController {
     this.updateUser = updateUser;
   }
 
-  @PutMapping
+  @PutMapping("/{id}")
   @Operation(summary = "Update user", description = "Update user from FoodArch.")
-  public ResponseEntity<UserOutput> updateUser(@Valid @RequestBody UserInput userInput) {
+  public ResponseEntity<UserOutput> updateUser(
+      @ParameterObject
+      @PathVariable UUID id,
+      @Valid
+      @RequestBody UserInput userInput) {
 
-    User user = updateUser.execute(userInput);
+    User user = updateUser.execute(id, userInput);
 
     UserOutput response = UserPresenter.userResponse(user);
 

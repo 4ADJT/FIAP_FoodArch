@@ -13,8 +13,6 @@ public class UserCPFValidation {
         throw new ValidationErrorException("CPF cannot be empty.", HttpStatus.BAD_REQUEST);
       }
 
-      cpf = cpf.replaceAll("\\D", "").trim();
-
       if (cpf.length() != 11) {
         throw new ValidationErrorException("CPF should have 11 characters.", HttpStatus.BAD_REQUEST);
       }

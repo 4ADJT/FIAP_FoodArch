@@ -1,10 +1,11 @@
 package br.com.fiap.foodarch.infra.config.injectable;
 
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
+import br.com.fiap.foodarch.domain.entities.users.UpdateUserFactory;
 import br.com.fiap.foodarch.domain.usecases.users.CreateUser;
 import br.com.fiap.foodarch.domain.usecases.users.ListUsers;
 import br.com.fiap.foodarch.domain.usecases.users.UpdateUser;
-import br.com.fiap.foodarch.domain.entities.users.UserFactory;
+import br.com.fiap.foodarch.domain.entities.users.CreateUserFactory;
 import br.com.fiap.foodarch.application.controller.users.CreateUserController;
 import br.com.fiap.foodarch.application.controller.users.GetAllUsersController;
 import br.com.fiap.foodarch.application.controller.users.UpdateUserController;
@@ -18,8 +19,13 @@ import org.springframework.context.annotation.Configuration;
 public class InjectUserConfig {
 
   @Bean
-  public UserFactory userFactory() {
-      return new UserFactory();
+  public CreateUserFactory CreateUserFactory() {
+      return new CreateUserFactory();
+  }
+
+  @Bean
+  public UpdateUserFactory UpdateUserFactory() {
+    return new UpdateUserFactory();
   }
 
   @Bean
@@ -28,7 +34,7 @@ public class InjectUserConfig {
   }
 
   @Bean
-  UpdateUser updateUser(UserRepository repository, UserFactory factory) {
+  UpdateUser updateUser(UserRepository repository, UpdateUserFactory factory) {
     return new UpdateUser(repository, factory);
   }
 
@@ -38,7 +44,7 @@ public class InjectUserConfig {
   }
 
   @Bean
-  CreateUser createUser(UserRepository repository, UserFactory factory) {
+  CreateUser createUser(UserRepository repository, CreateUserFactory factory) {
     return new CreateUser(repository, factory);
   }
 
