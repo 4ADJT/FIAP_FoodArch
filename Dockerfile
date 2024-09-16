@@ -11,8 +11,8 @@ RUN mvn dependency:go-offline
 # Copiar o código fonte da aplicação
 COPY src ./src
 
-# Compilar e empacotar a aplicação, pulando os testes
-RUN mvn clean package -DskipTests
+# Compilar e empacotar a aplicação
+RUN mvn clean package
 
 # Etapa 2: Configuração da imagem final para execução usando uma imagem leve do OpenJDK
 FROM openjdk:17-slim
