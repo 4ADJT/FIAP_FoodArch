@@ -34,4 +34,11 @@ public class RestaurantEntity {
   @UpdateTimestamp
   private LocalDateTime updated_at;
 
+  public RestaurantEntity(String name, UUID owner_id, UUID id, LocalDateTime created_at, LocalDateTime updated_at) {
+    this.name = name;
+    this.id = id;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
+    this.owner.setId(owner_id);
+  }
 }
