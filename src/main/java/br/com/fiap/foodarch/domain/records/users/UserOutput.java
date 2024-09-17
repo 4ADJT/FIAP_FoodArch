@@ -22,5 +22,5 @@ public record UserOutput(
 
     @Schema(description = "User's cpf", example = "123.456.789-00")
     String cpf
-) {
+    ) {
 }

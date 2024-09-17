@@ -3,7 +3,7 @@ package br.com.fiap.foodarch.domain.usecases.users;
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.users.UpdateUserFactory;
 import br.com.fiap.foodarch.domain.entities.users.User;
-import br.com.fiap.foodarch.domain.exceptions.UserUnauthorizedException;
+import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
 import br.com.fiap.foodarch.domain.records.users.UserInput;
 import org.springframework.http.HttpStatus;
 

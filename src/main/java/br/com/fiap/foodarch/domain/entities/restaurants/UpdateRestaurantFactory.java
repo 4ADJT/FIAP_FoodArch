@@ -5,8 +5,8 @@ import java.util.UUID;
 
 public class UpdateRestaurantFactory {
 
-      public Restaurants updateRestaurant(UUID id, String name, UUID ownerId, LocalDateTime createdAt) {
-        return new Restaurants.UpdateRestaurantBuilder()
+      public Restaurant updateRestaurant(UUID id, String name, UUID ownerId, LocalDateTime createdAt) {
+        return new Restaurant.UpdateRestaurantBuilder()
             .id(id)
             .name(name)
             .ownerId(ownerId)

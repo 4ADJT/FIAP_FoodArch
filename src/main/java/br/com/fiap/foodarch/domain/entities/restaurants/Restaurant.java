@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Restaurants {
+public class Restaurant {
 
   private UUID id;
 
@@ -25,13 +25,13 @@ public class Restaurants {
   private LocalDateTime updatedAt;
 
   @Builder(builderClassName = "CreateRestaurantBuilder")
-  public Restaurants(String name, UUID ownerId) {
+  public Restaurant(String name, UUID ownerId) {
     this.name = name;
     this.ownerId = ownerId;
   }
 
   @Builder(builderClassName = "UpdateRestaurantBuilder")
-  public Restaurants(UUID id, String name, UUID ownerId, LocalDateTime createdAt) {
+  public Restaurant(UUID id, String name, UUID ownerId, LocalDateTime createdAt) {
     this.id = id;
     this.name = name;
     this.ownerId = ownerId;

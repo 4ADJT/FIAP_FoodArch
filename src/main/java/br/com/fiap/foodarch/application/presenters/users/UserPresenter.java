@@ -11,7 +11,7 @@ public class UserPresenter {
       user.getEmail(),
       user.getBirthdate(),
       user.getCpf()
-    );
+      );
   }
 
 }
