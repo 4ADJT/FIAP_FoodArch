@@ -1,12 +1,10 @@
 package br.com.fiap.foodarch.application.controller.users;
 
 import br.com.fiap.foodarch.application.presenters.users.UserPresenter;
-import br.com.fiap.foodarch.domain.entities.users.User;
 import br.com.fiap.foodarch.domain.records.users.UserOutput;
 import br.com.fiap.foodarch.domain.usecases.users.GetUserById;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

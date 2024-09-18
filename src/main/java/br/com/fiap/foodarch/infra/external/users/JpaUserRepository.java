@@ -5,10 +5,10 @@ import br.com.fiap.foodarch.domain.entities.users.User;
 import br.com.fiap.foodarch.domain.exceptions.users.UserAlreadyExistsException;
 import br.com.fiap.foodarch.domain.exceptions.users.UserNotExistsException;
 import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
@@ -63,7 +63,6 @@ public class JpaUserRepository implements UserRepository {
         Stream<User> userStream = users.stream().map(mapper::toDomain);
 
         return userStream.toList();
-
     }
 
     @Override
@@ -80,12 +79,12 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    @EntityGraph(attributePaths = {"restaurants"})
     public User findById(UUID id) {
         UserEntity user = this.repository.findById(id).orElseThrow(
             () -> new UserNotExistsException("User not found.", HttpStatus.BAD_REQUEST)
         );
 
+        Hibernate.initialize(user.getRestaurants());
 
         return mapper.toDomain(user);
     }
