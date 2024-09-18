@@ -8,9 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
@@ -36,7 +34,7 @@ public class UserEntity {
   private String cpf;
 
   @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private Set<RestaurantEntity> restaurants = new HashSet<>();
+  private List<RestaurantEntity> restaurants = new ArrayList<>();
 
   @CreationTimestamp
   private LocalDateTime created_at;

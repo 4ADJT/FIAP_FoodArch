@@ -1,8 +1,10 @@
 package br.com.fiap.foodarch.infra.config.injectable;
 
+import br.com.fiap.foodarch.application.controller.users.GetUserByIdController;
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.users.UpdateUserFactory;
 import br.com.fiap.foodarch.domain.usecases.users.CreateUser;
+import br.com.fiap.foodarch.domain.usecases.users.GetUserById;
 import br.com.fiap.foodarch.domain.usecases.users.ListUsers;
 import br.com.fiap.foodarch.domain.usecases.users.UpdateUser;
 import br.com.fiap.foodarch.domain.entities.users.CreateUserFactory;
@@ -49,6 +51,11 @@ public class InjectUserConfig {
   }
 
   @Bean
+  GetUserById getUserById(UserRepository repository) {
+    return new GetUserById(repository);
+  }
+
+  @Bean
   JpaUserRepository jpaUserRepository(IUserRepository repository, UserEntityMapper mapper) {
     return new JpaUserRepository(repository, mapper);
   }
@@ -66,6 +73,11 @@ public class InjectUserConfig {
   @Bean
   CreateUserController createUserController(CreateUser createUser) {
     return new CreateUserController(createUser);
+  }
+
+  @Bean
+  GetUserByIdController getUserByIdController(GetUserById getUserById) {
+    return new GetUserByIdController(getUserById);
   }
 
 }
