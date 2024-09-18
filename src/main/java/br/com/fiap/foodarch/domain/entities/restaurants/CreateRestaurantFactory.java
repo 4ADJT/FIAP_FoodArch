@@ -5,7 +5,7 @@ import java.util.UUID;
 public class CreateRestaurantFactory {
 
     public Restaurant createRestaurant(String name, UUID ownerId) {
-      return new Restaurant.CreateRestaurantBuilder()
+      return Restaurant.createRestaurant()
           .name(name)
           .ownerId(ownerId)
           .build();

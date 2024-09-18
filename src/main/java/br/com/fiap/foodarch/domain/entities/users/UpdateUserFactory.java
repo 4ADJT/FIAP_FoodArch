@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class UpdateUserFactory {
   public User updateUser(UUID id, String name, String email, LocalDate birthdate, String cpf, LocalDateTime createdAt) {
-    return new User.UpdateUserBuilder()
+    return User.updateUser()
         .id(id)
         .name(name)
         .email(email)

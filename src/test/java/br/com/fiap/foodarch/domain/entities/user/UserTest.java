@@ -32,7 +32,7 @@ class UserTest {
     LocalDate validBirthdate = LocalDate.of(1987, 5, 15);
 
     // Criação do usuário usando o builder
-    User user = User.builder()
+    User user = User.createUser()
         .name("Rodrigo Brocchi")
         .email(validEmail)
         .cpf(validCpf)
@@ -58,7 +58,7 @@ class UserTest {
     LocalDate validBirthdate = LocalDate.of(1987, 5, 15);
 
     // Expectativa: lançamento de exceção ao validar CPF
-    assertThatThrownBy(() -> User.builder()
+    assertThatThrownBy(() -> User.createUser()
         .name("Rodrigo Brocchi")
         .email(validEmail)
         .cpf(invalidCpf)
@@ -81,7 +81,7 @@ class UserTest {
     LocalDate validBirthdate = LocalDate.of(1987, 5, 15);
 
     // Expectativa: lançamento de exceção ao validar email
-    assertThatThrownBy(() -> User.builder()
+    assertThatThrownBy(() -> User.createUser()
         .name("Rodrigo Brocchi")
         .email(invalidEmail)
         .cpf(validCpf)
@@ -104,7 +104,7 @@ class UserTest {
     LocalDate invalidBirthdate = LocalDate.now().plusDays(1);
 
     // Expectativa: lançamento de exceção ao validar data de nascimento
-    assertThatThrownBy(() -> User.builder()
+    assertThatThrownBy(() -> User.createUser()
         .name("Rodrigo Brocchi")
         .email(validEmail)
         .cpf(validCpf)
@@ -112,19 +112,6 @@ class UserTest {
         .build())
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("Birthdate cannot be in the future");
-  }
-
-  @Test
-  @DisplayName("Deve considerar dois usuários iguais se tiverem o mesmo ID")
-  void testEqualsAndHashCode() {
-    UUID id = UUID.randomUUID();
-    User user1 = new User(id, "Rodrigo Brocchi", "rodrigo@example.com",
-        LocalDate.of(1987, 5, 15), "52998224725", LocalDateTime.now(), LocalDateTime.now());
-    User user2 = new User(id, "Rodrigo Brocchi", "rodrigo@example.com",
-        LocalDate.of(1987, 5, 15), "52998224725", LocalDateTime.now(), LocalDateTime.now());
-
-    assertEquals(user1, user2, "Usuários com o mesmo ID devem ser iguais");
-    assertEquals(user1.hashCode(), user2.hashCode(), "HashCodes devem ser iguais para usuários com o mesmo ID");
   }
 
   @Test

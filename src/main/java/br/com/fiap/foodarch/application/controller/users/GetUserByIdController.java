@@ -1,6 +1,8 @@
 package br.com.fiap.foodarch.application.controller.users;
 
+import br.com.fiap.foodarch.application.presenters.users.UserPresenter;
 import br.com.fiap.foodarch.domain.entities.users.User;
+import br.com.fiap.foodarch.domain.records.users.UserOutput;
 import br.com.fiap.foodarch.domain.usecases.users.GetUserById;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,11 +30,14 @@ public class GetUserByIdController {
 
   @GetMapping("/{id}")
   @Operation(summary = "Get user by id.", description = "Get users by id from FoodArch.")
-  public ResponseEntity<User> getUserById(
+  public ResponseEntity<UserOutput> getUserById(
       @ParameterObject
       @PathVariable UUID id
   ) {
-    return ResponseEntity.ok(getUserById.execute(id));
+
+    UserOutput user = UserPresenter.userResponse(getUserById.execute(id));
+
+    return ResponseEntity.ok(user);
   }
 
 }

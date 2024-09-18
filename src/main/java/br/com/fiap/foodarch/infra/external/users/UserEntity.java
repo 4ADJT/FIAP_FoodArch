@@ -34,7 +34,7 @@ public class UserEntity {
   private String cpf;
 
   @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-  private List<RestaurantEntity> restaurants = new ArrayList<>();
+  private Set<RestaurantEntity> restaurants = new HashSet<>();
 
   @CreationTimestamp
   private LocalDateTime created_at;

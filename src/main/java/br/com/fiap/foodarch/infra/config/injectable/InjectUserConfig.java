@@ -14,8 +14,10 @@ import br.com.fiap.foodarch.application.controller.users.UpdateUserController;
 import br.com.fiap.foodarch.infra.external.users.JpaUserRepository;
 import br.com.fiap.foodarch.infra.external.users.UserEntityMapper;
 import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 public class InjectUserConfig {

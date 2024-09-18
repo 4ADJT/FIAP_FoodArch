@@ -24,13 +24,13 @@ public class Restaurant {
 
   private LocalDateTime updatedAt;
 
-  @Builder(builderClassName = "CreateRestaurantBuilder")
+  @Builder(builderClassName = "CreateRestaurantBuilder", builderMethodName = "createRestaurant")
   public Restaurant(String name, UUID ownerId) {
     this.name = name;
     this.ownerId = ownerId;
   }
 
-  @Builder(builderClassName = "UpdateRestaurantBuilder")
+  @Builder(builderClassName = "UpdateRestaurantBuilder", builderMethodName = "updateRestaurant")
   public Restaurant(UUID id, String name, UUID ownerId, LocalDateTime createdAt) {
     this.id = id;
     this.name = name;

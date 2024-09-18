@@ -8,6 +8,7 @@ import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
@@ -79,10 +80,12 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
+    @EntityGraph(attributePaths = {"restaurants"})
     public User findById(UUID id) {
         UserEntity user = this.repository.findById(id).orElseThrow(
             () -> new UserNotExistsException("User not found.", HttpStatus.BAD_REQUEST)
         );
+
 
         return mapper.toDomain(user);
     }
