@@ -1,6 +1,7 @@
 services:
   dbpostgres:
     image: postgres:latest
+    container_name: dbpostgres
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -19,16 +20,6 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-  nginx:
-    image: nginx:alpine
-    restart: always
-    ports:
-      - 80:80
-    networks:
-      - foodarch
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-
   app:
     container_name: foodarch
     build:
@@ -45,10 +36,22 @@ services:
     depends_on:
       dbpostgres:
         condition: service_healthy
-      nginx:
+    networks:
+      - foodarch
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      app:
         condition: service_started
     networks:
       - foodarch
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
 
 networks:
   foodarch:
