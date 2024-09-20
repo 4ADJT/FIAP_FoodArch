@@ -17,6 +17,7 @@ public class ListUsers {
 
   @Transactional
   public Page<User> execute(Pageable pageable) {
+
     return repository.listUsers(pageable);
   }
 }

@@ -2,12 +2,14 @@ package br.com.fiap.foodarch.infra.external.restaurants;
 
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.RestaurantRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
+import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
 import br.com.fiap.foodarch.infra.external.users.UserEntity;
 import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantRepository;
 import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -39,11 +41,7 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
     RestaurantEntity toSave = repository.save(restaurantEntity);
 
-    Restaurant saved = mapper.toDomain(toSave);
-
-    System.out.println("Restaurant saved: " + saved.getId());
-
-    return saved;
+    return mapper.toDomain(toSave);
   }
 
   @Override
@@ -64,6 +62,10 @@ public class JpaRestaurantRepository implements RestaurantRepository {
   public Restaurant updateRestaurant(Restaurant restaurant, UUID userId) {
     UserEntity userEntity = this.userRepository.getReferenceById(userId);
 
+    if(userEntity.getRestaurants().stream().noneMatch(r -> r.getId().equals(restaurant.getId()))) {
+      throw new UserUnauthorizedException("Unauthorized", HttpStatus.UNAUTHORIZED);
+    }
+
     RestaurantEntity restaurantEntity = mapper.toEntity(restaurant, userEntity);
 
     restaurantEntity.setName(restaurant.getName());
@@ -82,6 +84,9 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
   @Override
   public void deleteById(UUID id) {
-    this.repository.deleteById(id);
+    RestaurantEntity restaurant = this.repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Restaurant not found"));
+
+    this.repository.deleteById(restaurant.getId());
   }
 }

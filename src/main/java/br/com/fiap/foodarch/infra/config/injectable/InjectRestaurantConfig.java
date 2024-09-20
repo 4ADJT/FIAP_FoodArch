@@ -1,7 +1,9 @@
 package br.com.fiap.foodarch.infra.config.injectable;
 
 import br.com.fiap.foodarch.application.controller.restaurants.CreateRestaurantController;
+import br.com.fiap.foodarch.application.controller.restaurants.GetAllRestaurantsController;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.RestaurantRepository;
+import br.com.fiap.foodarch.domain.usecases.restaurants.GetAllRestaurants;
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.CreateRestaurantFactory;
 import br.com.fiap.foodarch.domain.usecases.restaurants.CreateRestaurant;
@@ -42,5 +44,15 @@ public class InjectRestaurantConfig {
   @Bean
   public CreateRestaurantController createRestaurantController(CreateRestaurant createRestaurant) {
       return new CreateRestaurantController(createRestaurant);
+  }
+
+  @Bean
+  public GetAllRestaurants getAllRestaurants(RestaurantRepository repository) {
+      return new GetAllRestaurants(repository);
+  }
+
+  @Bean
+  public GetAllRestaurantsController getAllRestaurantsController(GetAllRestaurants getAllRestaurants) {
+      return new GetAllRestaurantsController(getAllRestaurants);
   }
 }
