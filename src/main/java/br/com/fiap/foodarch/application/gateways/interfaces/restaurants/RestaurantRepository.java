@@ -1,6 +1,7 @@
 package br.com.fiap.foodarch.application.gateways.interfaces.restaurants;
 
 import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
+import br.com.fiap.foodarch.infra.external.users.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,13 +10,13 @@ import java.util.UUID;
 
 public interface RestaurantRepository {
 
-  Restaurant createRestaurant(Restaurant restaurant);
+  Restaurant createRestaurant(Restaurant restaurant, UserEntity owner);
 
   Page<Restaurant> listRestaurants(Pageable pageable);
 
-  List<Restaurant> findByOwnerId(UUID ownerId);
+  Page<Restaurant> findByOwnerId(UUID ownerId, Pageable pageable);
 
-  Restaurant updateRestaurant(Restaurant restaurant);
+  Restaurant updateRestaurant(Restaurant restaurant, UserEntity owner);
 
   Restaurant findById(UUID id);
 
