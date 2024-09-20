@@ -17,7 +17,6 @@ import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 public class InjectUserConfig {

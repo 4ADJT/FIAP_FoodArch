@@ -10,14 +10,15 @@ import java.util.UUID;
 
 public interface RestaurantRepository {
 
-  Restaurant createRestaurant(Restaurant restaurant, UserEntity owner);
+  Restaurant createRestaurant(Restaurant restaurant, UUID userId);
 
   Page<Restaurant> listRestaurants(Pageable pageable);
 
   Page<Restaurant> findByOwnerId(UUID ownerId, Pageable pageable);
 
-  Restaurant updateRestaurant(Restaurant restaurant, UserEntity owner);
+  Restaurant updateRestaurant(Restaurant restaurant, UUID userId);
 
   Restaurant findById(UUID id);
 
+  void deleteById(UUID id);
 }
