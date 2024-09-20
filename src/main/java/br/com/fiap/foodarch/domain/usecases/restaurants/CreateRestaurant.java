@@ -5,7 +5,9 @@ import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository
 import br.com.fiap.foodarch.domain.entities.restaurants.CreateRestaurantFactory;
 import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
 import br.com.fiap.foodarch.domain.entities.users.User;
+import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
 import br.com.fiap.foodarch.domain.records.restaurants.RestaurantInput;
+import org.springframework.http.HttpStatus;
 
 import java.util.UUID;
 
@@ -28,12 +30,8 @@ public class CreateRestaurant {
 
     User userTo = this.userRepository.findById(ownerId);
 
-    if(userTo == null) {
-      throw new RuntimeException("User not found");
-    }
-
-    if(ownerId != userTo.getId()) {
-      throw new RuntimeException("User not authorized");
+    if(!restaurantInput.ownerId().equals(ownerId)) {
+      throw new UserUnauthorizedException("User not authorized", HttpStatus.UNAUTHORIZED);
     }
 
     Restaurant restaurant = factory.createRestaurant(
