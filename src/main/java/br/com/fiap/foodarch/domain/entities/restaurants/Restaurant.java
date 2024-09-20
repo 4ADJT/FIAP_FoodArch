@@ -1,6 +1,5 @@
 package br.com.fiap.foodarch.domain.entities.restaurants;
 
-import br.com.fiap.foodarch.domain.entities.users.User;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.*;
