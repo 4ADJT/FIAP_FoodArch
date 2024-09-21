@@ -17,44 +17,45 @@ Uma nova maneira de conectar você aos melhores restaurantes da cidade. Simplifi
 
 ## Sobre o Projeto
 
-O **FoodArch** é uma plataforma desenvolvida em Java com Maven, projetada para revolucionar a forma como restaurantes e clientes interagem. Com uma interface intuitiva e funcionalidades robustas, oferecemos uma experiência única para encontrar, reservar e avaliar restaurantes.
+O **FoodArch** é uma plataforma desenvolvida em Java com **Spring Boot** e Maven, projetada para revolucionar a forma como restaurantes e clientes interagem. Com uma interface intuitiva e funcionalidades robustas, oferecemos uma experiência única para encontrar, reservar e avaliar restaurantes.
 
 ## Funcionalidades Principais
 
 1. **Cadastro de Restaurantes**
 
-    - Restaurantes podem criar um perfil detalhado, incluindo:
-        - Nome do estabelecimento
-        - Localização e mapa
-        - Tipo de cozinha (italiana, japonesa, brasileira, etc.)
-        - Horários de funcionamento
-        - Capacidade de atendimento
+   - Restaurantes podem criar um perfil detalhado, incluindo:
+      - Nome do estabelecimento
+      - Localização e mapa
+      - Tipo de cozinha (italiana, japonesa, brasileira, etc.)
+      - Horários de funcionamento
+      - Capacidade de atendimento
 
 2. **Reserva de Mesas**
 
-    - Usuários podem reservar mesas facilmente para datas e horários desejados, garantindo sua experiência gastronômica sem filas ou esperas.
+   - Usuários podem reservar mesas facilmente para datas e horários desejados, garantindo sua experiência gastronômica sem filas ou esperas.
 
 3. **Avaliações e Comentários**
 
-    - Compartilhe suas experiências! Após a visita, avalie o restaurante e deixe comentários que possam ajudar outros usuários.
+   - Compartilhe suas experiências! Após a visita, avalie o restaurante e deixe comentários que possam ajudar outros usuários.
 
 4. **Busca de Restaurantes**
 
-    - Encontre o lugar perfeito com nossas ferramentas de busca e filtros:
-        - Pesquise por nome
-        - Filtre por localização próxima
-        - Escolha o tipo de cozinha que mais agrada ao seu paladar
+   - Encontre o lugar perfeito com nossas ferramentas de busca e filtros:
+      - Pesquise por nome
+      - Filtre por localização próxima
+      - Escolha o tipo de cozinha que mais agrada ao seu paladar
 
 5. **Gerenciamento de Reservas**
 
-    - Restaurantes têm acesso a um painel de controle para:
-        - Visualizar reservas pendentes e confirmadas
-        - Atualizar o status das mesas
-        - Organizar o fluxo de clientes de forma eficiente
+   - Restaurantes têm acesso a um painel de controle para:
+      - Visualizar reservas pendentes e confirmadas
+      - Atualizar o status das mesas
+      - Organizar o fluxo de clientes de forma eficiente
 
 ## Tecnologias Utilizadas
 
 - **Linguagem:** Java
+- **Framework:** Spring Boot
 - **Gerenciador de Dependências:** Maven
 - **Containerização:** Docker (com Docker Compose para execução simplificada)
 - **Documentação da API:** Swagger (acessível em `/doc`)
@@ -87,27 +88,27 @@ Siga os passos abaixo para configurar e executar o **FoodArch**:
 
 3. **Execute o Docker Compose:**
 
-    - Inicie a aplicação com o comando padrão:
+   - Inicie a aplicação com o comando padrão:
 
-      ```bash
-      docker-compose up
-      ```
+     ```bash
+     docker-compose up -d
+     ```
 
-    - Isso irá baixar as dependências, construir a imagem Docker e iniciar os serviços necessários.
+   - Isso irá baixar as dependências, construir a imagem Docker e iniciar os serviços necessários.
 
 4. **Acesse a aplicação:**
 
-    - Após a inicialização, a aplicação estará disponível em:
+   - Após a inicialização, a aplicação estará disponível em:
 
-      ```
-      http://localhost:8080
-      ```
+     ```
+     http://localhost:8080
+     ```
 
-    - Você também pode acessar a versão ao vivo em:
+   - Você também pode acessar a versão ao vivo em:
 
-      ```
-      https://fiap-foodarch.onrender.com/
-      ```
+     ```
+     https://fiap-foodarch.onrender.com/
+     ```
 
 ## Documentação da API
 
