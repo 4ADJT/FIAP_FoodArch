@@ -17,7 +17,8 @@ public class UserPresenter {
       .map(restaurant -> new RestaurantOutput(
         restaurant.getId(),
         restaurant.getName(),
-        restaurant.getOwnerId()
+        restaurant.getOwnerId(),
+        restaurant.getCreatedAt()
       ))
       .collect(Collectors.toSet());
 

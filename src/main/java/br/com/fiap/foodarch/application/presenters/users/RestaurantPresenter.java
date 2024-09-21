@@ -8,7 +8,8 @@ public class RestaurantPresenter {
     return new RestaurantOutput(
         restaurant.getId(),
         restaurant.getName(),
-        restaurant.getOwnerId()
+        restaurant.getOwnerId(),
+        restaurant.getCreatedAt()
       );
   }
 }
