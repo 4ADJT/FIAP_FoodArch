@@ -64,7 +64,7 @@ O **FoodArch** é uma plataforma desenvolvida em Java com **Spring Boot** e Mave
 
 Certifique-se de ter os seguintes itens instalados:
 
-- [Java JDK 8 ou superior](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [Java JDK 17 ou superior](https://www.oracle.com/java/technologies/javase-downloads.html)
 - [Maven 3 ou superior](https://maven.apache.org/download.cgi)
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/install/)
