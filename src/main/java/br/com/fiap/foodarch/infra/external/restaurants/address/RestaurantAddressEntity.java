@@ -49,7 +49,7 @@ public class RestaurantAddressEntity {
   @UpdateTimestamp
   private LocalDateTime updated_at;
 
-  public RestaurantAddressEntity(String street, String number, String neighborhood, String city, String state, String complement, String country, String zipCode) {
+  public RestaurantAddressEntity(String street, String number, String neighborhood, String city, String state, String complement, String country, String zipCode, RestaurantEntity restaurant) {
     this.street = street;
     this.number = number;
     this.neighborhood = neighborhood;
@@ -58,5 +58,6 @@ public class RestaurantAddressEntity {
     this.complement = complement;
     this.country = country;
     this.zipCode = zipCode;
+    this.restaurant = restaurant;
   }
 }

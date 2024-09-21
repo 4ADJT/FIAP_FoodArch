@@ -11,9 +11,9 @@ import br.com.fiap.foodarch.domain.entities.users.CreateUserFactory;
 import br.com.fiap.foodarch.application.controller.users.CreateUserController;
 import br.com.fiap.foodarch.application.controller.users.GetAllUsersController;
 import br.com.fiap.foodarch.application.controller.users.UpdateUserController;
-import br.com.fiap.foodarch.infra.external.users.JpaUserRepository;
+// import br.com.fiap.foodarch.infra.external.users.JpaUserRepository;
 import br.com.fiap.foodarch.infra.external.users.UserEntityMapper;
-import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
+// import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,10 +56,10 @@ public class InjectUserConfig {
     return new GetUserById(repository);
   }
 
-  @Bean
-  JpaUserRepository jpaUserRepository(IUserRepository repository, UserEntityMapper mapper) {
-    return new JpaUserRepository(repository, mapper);
-  }
+//  @Bean
+//  JpaUserRepository jpaUserRepository(IUserRepository repository, UserEntityMapper mapper) {
+//    return new JpaUserRepository(repository, mapper);
+//  }
 
   @Bean
   UpdateUserController updateUserController(UpdateUser updateUser) {

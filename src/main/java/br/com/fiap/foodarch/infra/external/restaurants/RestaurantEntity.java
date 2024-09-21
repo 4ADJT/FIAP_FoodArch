@@ -1,6 +1,5 @@
 package br.com.fiap.foodarch.infra.external.restaurants;
 
-import br.com.fiap.foodarch.infra.external.restaurants.address.RestaurantAddressEntity;
 import br.com.fiap.foodarch.infra.external.users.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;

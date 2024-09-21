@@ -38,6 +38,34 @@ public class RestaurantAddresses {
 
   private LocalDateTime updatedAt;
 
+  @Builder(builderClassName = "CreateRestaurantAddressBuilder", builderMethodName = "createRestaurantAddress")
+  public RestaurantAddresses(UUID restaurantId, String street, String number, String neighborhood, String city, String state, String complement, String country, String zipCode) {
+    this.restaurantId = restaurantId;
+    this.street = street;
+    this.number = number;
+    this.neighborhood = neighborhood;
+    this.city = city;
+    this.state = state;
+    this.complement = complement;
+    this.country = country;
+    this.zipCode = zipCode;
+  }
+
+  @Builder(builderClassName = "UpdateRestaurantAddressBuilder", builderMethodName = "updateRestaurantAddress")
+  public RestaurantAddresses(UUID id, UUID restaurantId, String street, String number, String neighborhood, String city, String state, String complement, String country, String zipCode, LocalDateTime createdAt) {
+    this.id = id;
+    this.restaurantId = restaurantId;
+    this.street = street;
+    this.number = number;
+    this.neighborhood = neighborhood;
+    this.city = city;
+    this.state = state;
+    this.complement = complement;
+    this.country = country;
+    this.zipCode = zipCode;
+    this.createdAt = createdAt;
+  }
+
   @PrePersist
   protected void onCreate() {
     createdAt = LocalDateTime.now();

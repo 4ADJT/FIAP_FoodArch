@@ -69,6 +69,8 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     RestaurantEntity restaurantEntity = mapper.toEntity(restaurant, userEntity);
 
     restaurantEntity.setName(restaurant.getName());
+    restaurantEntity.setId(restaurant.getId());
+    restaurantEntity.setCreated_at(restaurant.getCreatedAt());
 
     RestaurantEntity savedRestaurant = repository.save(restaurantEntity);
 

@@ -12,22 +12,22 @@ import br.com.fiap.foodarch.domain.entities.restaurants.CreateRestaurantFactory;
 import br.com.fiap.foodarch.domain.usecases.restaurants.CreateRestaurant;
 import br.com.fiap.foodarch.domain.usecases.restaurants.GetRestaurantsByUser;
 import br.com.fiap.foodarch.domain.usecases.restaurants.UpdateRestaurantName;
-import br.com.fiap.foodarch.infra.external.restaurants.JpaRestaurantRepository;
+// import br.com.fiap.foodarch.infra.external.restaurants.JpaRestaurantRepository;
 import br.com.fiap.foodarch.infra.external.restaurants.RestaurantEntityMapper;
-import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantRepository;
-import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
+// import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantRepository;
+// import br.com.fiap.foodarch.infra.gateways.persistance.users.IUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class InjectRestaurantConfig {
 
-  @Bean
-  JpaRestaurantRepository jpaRestaurantRepository(IRestaurantRepository repository,
-                                                  IUserRepository userRepository,
-                                                  RestaurantEntityMapper mapper) {
-      return new JpaRestaurantRepository(repository, userRepository, mapper);
-  }
+//  @Bean
+//  JpaRestaurantRepository jpaRestaurantRepository(IRestaurantRepository repository,
+//                                                  IUserRepository userRepository,
+//                                                  RestaurantEntityMapper mapper) {
+//      return new JpaRestaurantRepository(repository, userRepository, mapper);
+//  }
 
   @Bean
   public RestaurantEntityMapper restaurantEntityMapper() {
