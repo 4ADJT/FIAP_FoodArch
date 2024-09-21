@@ -5,9 +5,12 @@ import br.com.fiap.foodarch.application.controller.restaurants.address.GetRestau
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.RestaurantRepository;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.address.RestaurantAddressRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.address.CreateRestaurantAddressFactory;
+import br.com.fiap.foodarch.domain.entities.restaurants.address.UpdateRestaurantAddressFactory;
 import br.com.fiap.foodarch.domain.usecases.restaurants.address.CreateRestaurantAddress;
 import br.com.fiap.foodarch.domain.usecases.restaurants.address.GetRestaurantById;
+import br.com.fiap.foodarch.domain.usecases.restaurants.address.UpdateRestaurantAddress;
 import br.com.fiap.foodarch.infra.external.restaurants.address.RestaurantAddressMapper;
+import org.hibernate.annotations.Bag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -47,6 +50,20 @@ public class InjectRestaurantAddressConfig {
   @Bean
   public CreateRestaurantAddressController createRestaurantAddressController(CreateRestaurantAddress createRestaurantAddress) {
     return new CreateRestaurantAddressController(createRestaurantAddress);
+  }
+
+  @Bean
+  public UpdateRestaurantAddressFactory updateRestaurantAddressFactory() {
+    return new UpdateRestaurantAddressFactory();
+  }
+
+  @Bean
+  public UpdateRestaurantAddress updateRestaurantAddress(
+    RestaurantAddressRepository repository,
+    UpdateRestaurantAddressFactory factory,
+    RestaurantRepository restaurantRepository
+  ) {
+    return new UpdateRestaurantAddress(repository, factory, restaurantRepository);
   }
 
 }
