@@ -1,5 +1,6 @@
 package br.com.fiap.foodarch.infra.config.injectable;
 
+import br.com.fiap.foodarch.application.controller.restaurants.address.CreateRestaurantAddressController;
 import br.com.fiap.foodarch.application.controller.restaurants.address.GetRestaurantAddressByIdController;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.RestaurantRepository;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.address.RestaurantAddressRepository;
@@ -41,6 +42,11 @@ public class InjectRestaurantAddressConfig {
   @Bean
   public GetRestaurantAddressByIdController getRestaurantAddressByIdController(GetRestaurantById getRestaurantById) {
     return new GetRestaurantAddressByIdController(getRestaurantById);
+  }
+
+  @Bean
+  public CreateRestaurantAddressController createRestaurantAddressController(CreateRestaurantAddress createRestaurantAddress) {
+    return new CreateRestaurantAddressController(createRestaurantAddress);
   }
 
 }
