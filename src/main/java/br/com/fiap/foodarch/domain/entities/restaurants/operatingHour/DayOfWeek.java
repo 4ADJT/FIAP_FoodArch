@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.domain.entities.restaurants.operation;
+package br.com.fiap.foodarch.domain.entities.restaurants.operatingHour;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
