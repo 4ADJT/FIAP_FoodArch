@@ -33,7 +33,7 @@ public class UserEntity {
   @Column(unique = true, updatable = false, nullable = false)
   private String cpf;
 
-  @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<RestaurantEntity> restaurants = new HashSet<>();
 
   @CreationTimestamp

@@ -1,6 +1,6 @@
 package br.com.fiap.foodarch.application.controller.restaurants;
 
-import br.com.fiap.foodarch.application.presenters.users.RestaurantPresenter;
+import br.com.fiap.foodarch.application.presenters.restaurants.RestaurantPresenter;
 import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
 import br.com.fiap.foodarch.domain.records.restaurants.RestaurantOutput;
 import br.com.fiap.foodarch.domain.usecases.restaurants.GetAllRestaurants;

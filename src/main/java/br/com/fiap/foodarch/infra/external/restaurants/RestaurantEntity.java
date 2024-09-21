@@ -1,5 +1,6 @@
 package br.com.fiap.foodarch.infra.external.restaurants;
 
+import br.com.fiap.foodarch.infra.external.restaurants.address.RestaurantAddressEntity;
 import br.com.fiap.foodarch.infra.external.users.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,7 +26,7 @@ public class RestaurantEntity {
   private String name;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false, unique = true)
   private UserEntity owner;
 
   @CreationTimestamp
