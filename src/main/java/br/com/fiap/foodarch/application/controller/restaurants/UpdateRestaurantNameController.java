@@ -4,6 +4,7 @@ import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
 import br.com.fiap.foodarch.domain.records.restaurants.RestaurantInput;
 import br.com.fiap.foodarch.domain.records.restaurants.RestaurantOutput;
 import br.com.fiap.foodarch.domain.usecases.restaurants.UpdateRestaurantName;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class UpdateRestaurantNameController {
   }
 
   @PutMapping("/{ownerId}")
+  @Operation(summary = "Update restaurant name", description = "Update restaurant name from FoodArch.")
   public ResponseEntity<RestaurantOutput> updateRestaurantName(
       @RequestParam("restaurantId") UUID restaurantId,
       @RequestBody RestaurantInput restaurantInput,
@@ -35,7 +37,7 @@ public class UpdateRestaurantNameController {
         updated.getCreatedAt()
     );
 
-    return ResponseEntity.ok(output);
+    return ResponseEntity.status(201).body(output);
   }
 
 }
