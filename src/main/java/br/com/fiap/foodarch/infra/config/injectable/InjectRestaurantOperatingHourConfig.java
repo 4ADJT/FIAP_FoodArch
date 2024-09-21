@@ -18,6 +18,11 @@ public class InjectRestaurantOperatingHourConfig {
     return new RestaurantOperatingHourMapper();
   }
 
+   @Bean
+  public CreateRestaurantOperatingHourFactory createRestaurantOperatingHourFactory() {
+    return new CreateRestaurantOperatingHourFactory();
+  }
+
   @Bean
   public CreateRestaurantOperatingHour createRestaurantOperatingHour(
       RestaurantOperatingHourRepository repository,
