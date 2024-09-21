@@ -2,6 +2,7 @@ package br.com.fiap.foodarch.infra.config.injectable;
 
 import br.com.fiap.foodarch.application.controller.restaurants.CreateRestaurantController;
 import br.com.fiap.foodarch.application.controller.restaurants.GetAllRestaurantsController;
+import br.com.fiap.foodarch.application.controller.restaurants.GetRestaurantsByUserController;
 import br.com.fiap.foodarch.application.controller.restaurants.UpdateRestaurantNameController;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.RestaurantRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.UpdateRestaurantFactory;
@@ -9,6 +10,7 @@ import br.com.fiap.foodarch.domain.usecases.restaurants.GetAllRestaurants;
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.CreateRestaurantFactory;
 import br.com.fiap.foodarch.domain.usecases.restaurants.CreateRestaurant;
+import br.com.fiap.foodarch.domain.usecases.restaurants.GetRestaurantsByUser;
 import br.com.fiap.foodarch.domain.usecases.restaurants.UpdateRestaurantName;
 import br.com.fiap.foodarch.infra.external.restaurants.JpaRestaurantRepository;
 import br.com.fiap.foodarch.infra.external.restaurants.RestaurantEntityMapper;
@@ -74,4 +76,16 @@ public class InjectRestaurantConfig {
   public UpdateRestaurantNameController updateRestaurantNameController(UpdateRestaurantName updateRestaurantName) {
       return new UpdateRestaurantNameController(updateRestaurantName);
   }
+
+  @Bean
+  public GetRestaurantsByUser getRestaurantsByUser(RestaurantRepository repository) {
+      return new GetRestaurantsByUser(repository);
+  }
+
+  @Bean
+  public GetRestaurantsByUserController getRestaurantsByUserController(GetRestaurantsByUser getRestaurantsByUser) {
+      return new GetRestaurantsByUserController(getRestaurantsByUser);
+  }
+
+
 }
