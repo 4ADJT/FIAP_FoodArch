@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  dbpostgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: foodarch
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://dbpostgres:5432/foodarch
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: postgres
+      SERVER_PORT: 8080
+    depends_on:
+      - dbpostgres
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    # Observação: As montagens de volumes locais podem não ser suportadas pelo kompose.
+    # Considere configurar o Nginx usando ConfigMaps no Kubernetes.
+
+volumes:
+  db_data:
