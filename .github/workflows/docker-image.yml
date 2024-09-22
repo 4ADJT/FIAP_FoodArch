@@ -20,7 +20,9 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
     - name: Build the Docker image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/meu-repositorio:latest .
-
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:1.0.0 -t ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:latest .
+    
     - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/meu-repositorio:latest
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:1.0.0
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:latest
