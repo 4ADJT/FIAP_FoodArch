@@ -2,6 +2,7 @@ package br.com.fiap.foodarch.infra.config.injectable;
 
 import br.com.fiap.foodarch.application.controller.restaurants.address.CreateRestaurantAddressController;
 import br.com.fiap.foodarch.application.controller.restaurants.address.GetRestaurantAddressByIdController;
+import br.com.fiap.foodarch.application.controller.restaurants.address.UpdateRestaurantAddressController;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.RestaurantRepository;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.address.RestaurantAddressRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.address.CreateRestaurantAddressFactory;
@@ -10,7 +11,6 @@ import br.com.fiap.foodarch.domain.usecases.restaurants.address.CreateRestaurant
 import br.com.fiap.foodarch.domain.usecases.restaurants.address.GetRestaurantById;
 import br.com.fiap.foodarch.domain.usecases.restaurants.address.UpdateRestaurantAddress;
 import br.com.fiap.foodarch.infra.external.restaurants.address.RestaurantAddressMapper;
-import org.hibernate.annotations.Bag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -66,4 +66,8 @@ public class InjectRestaurantAddressConfig {
     return new UpdateRestaurantAddress(repository, factory, restaurantRepository);
   }
 
+  @Bean
+  public UpdateRestaurantAddressController updateRestaurantAddressController(UpdateRestaurantAddress updateRestaurantAddress) {
+    return new UpdateRestaurantAddressController(updateRestaurantAddress);
+  }
 }

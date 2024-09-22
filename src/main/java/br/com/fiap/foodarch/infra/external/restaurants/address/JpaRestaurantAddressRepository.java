@@ -47,7 +47,13 @@ public class JpaRestaurantAddressRepository implements RestaurantAddressReposito
                                                      UUID restaurantId) {
     RestaurantEntity restaurantRef = this.restaurantRepository.getReferenceById(restaurantId);
 
+    RestaurantAddressEntity restaurantToUpdate = this.repository.findByRestaurantId(restaurantId);
+
     RestaurantAddressEntity restaurantAddressEntity = mapper.toEntity(restaurantAddress, restaurantRef);
+
+    restaurantAddressEntity.setRestaurant(restaurantToUpdate.getRestaurant());
+    restaurantAddressEntity.setId(restaurantToUpdate.getId());
+    restaurantAddressEntity.setCreated_at(restaurantToUpdate.getCreated_at());
 
     RestaurantAddressEntity toSave = repository.save(restaurantAddressEntity);
 

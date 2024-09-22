@@ -36,20 +36,21 @@ public class UpdateRestaurantAddress {
     RestaurantAddresses restaurantAddressToUpdate = repository.findByRestaurantId(restaurantId);
 
     if(restaurantAddressToUpdate == null) {
-      throw new RestaurantNotFound("Restaurant address not found", HttpStatus.NOT_FOUND);
+      throw new RestaurantNotFound("Restaurant address not found. Create before update",
+          HttpStatus.NOT_FOUND);
     }
 
-    Restaurant restaurant = restaurantRepository.findById(restaurantAddressToUpdate.getId());
+    Restaurant restaurant = restaurantRepository.findById(restaurantAddressToUpdate.getRestaurantId());
 
     if(restaurant == null) {
-      throw new RestaurantNotFound("Restaurant not found", HttpStatus.NOT_FOUND);
+      throw new RestaurantNotFound("Restaurant not found.", HttpStatus.NOT_FOUND);
     }
 
-    if(restaurant.getOwnerId() != ownerId) {
+    if(!restaurant.getOwnerId().equals(ownerId)) {
       throw new UserUnauthorizedException("User unauthorized", HttpStatus.UNAUTHORIZED);
     }
 
-    if (restaurantAddressToUpdate.getRestaurantId() != restaurantId) {
+    if (!restaurantAddressInput.restaurantId().equals(restaurantId)) {
       throw new RestaurantNotFound("The restaurant ID for reference is not the same. " +
           "Check which restaurant should be updated.", HttpStatus.BAD_REQUEST);
     }
@@ -68,7 +69,7 @@ public class UpdateRestaurantAddress {
         restaurantAddressToUpdate.getCreatedAt()
     );
 
-    return repository.updateRestaurantAddress(restaurantAddress, restaurantId);
+    return repository.updateRestaurantAddress(restaurantAddress, restaurantAddressToUpdate.getRestaurantId());
   }
 
 }
