@@ -1,7 +1,6 @@
 package br.com.fiap.foodarch.application.controller.restaurants.address;
 
 import br.com.fiap.foodarch.application.presenters.restaurants.RestaurantAddressPresenter;
-import br.com.fiap.foodarch.application.presenters.restaurants.RestaurantPresenter;
 import br.com.fiap.foodarch.domain.entities.restaurants.address.RestaurantAddresses;
 import br.com.fiap.foodarch.domain.records.restaurants.address.RestaurantAddressOutput;
 import br.com.fiap.foodarch.domain.usecases.restaurants.address.GetRestaurantById;
@@ -18,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/restaurants/address")
-@Tag(name = "Restaurants/Address")
+@Tag(name = "Restaurant - Address")
 public class GetRestaurantAddressByIdController {
   private final GetRestaurantById getRestaurantById;
 
