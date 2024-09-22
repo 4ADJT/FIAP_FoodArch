@@ -14,9 +14,7 @@ services:
       - db_data:/var/lib/postgresql/data
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: rbrocchi/foodarch:latest
     restart: always
     ports:
       - "8080:8080"
@@ -35,8 +33,6 @@ services:
       - "80:80"
     depends_on:
       - app
-    # Observação: As montagens de volumes locais podem não ser suportadas pelo kompose.
-    # Considere configurar o Nginx usando ConfigMaps no Kubernetes.
 
 volumes:
   db_data:
