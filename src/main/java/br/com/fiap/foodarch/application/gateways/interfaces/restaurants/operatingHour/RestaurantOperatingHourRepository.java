@@ -2,6 +2,7 @@ package br.com.fiap.foodarch.application.gateways.interfaces.restaurants.operati
 
 import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.RestaurantOperatingHours;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface RestaurantOperatingHourRepository {

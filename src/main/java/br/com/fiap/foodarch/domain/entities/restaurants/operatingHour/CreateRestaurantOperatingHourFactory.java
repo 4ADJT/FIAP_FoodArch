@@ -1,13 +1,12 @@
 package br.com.fiap.foodarch.domain.entities.restaurants.operatingHour;
 
-import java.time.LocalTime;
 import java.util.UUID;
 
 public class CreateRestaurantOperatingHourFactory {
 
   public RestaurantOperatingHours createRestaurantOperatingHour(UUID restaurantId, DayOfWeek dayOfWeek,
-      LocalTime openTime,
-      LocalTime closeTime) {
+      String openTime,
+      String closeTime) {
     return RestaurantOperatingHours.createRestaurantOperatingHour()
         .restaurantId(restaurantId)
         .dayOfWeek(dayOfWeek)

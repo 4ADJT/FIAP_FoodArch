@@ -1,19 +1,24 @@
 package br.com.fiap.foodarch.domain.entities.restaurants.operatingHour;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import lombok.*;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-
 public class RestaurantOperatingHours {
 
   private UUID id;
@@ -22,17 +27,23 @@ public class RestaurantOperatingHours {
 
   private DayOfWeek dayOfWeek;
 
-  private LocalTime openTime;
+  @JsonFormat(pattern = "HH:mm:ss")
+  private String openTime;
 
-  private LocalTime closeTime;
+  @JsonFormat(pattern = "HH:mm:ss")
+  private String closeTime;
 
   private LocalDateTime createdAt;
 
   private LocalDateTime updatedAt;
 
   @Builder(builderClassName = "CreateRestaurantOperatingHourBuilder", builderMethodName = "createRestaurantOperatingHour")
-  public RestaurantOperatingHours(UUID restaurantId, DayOfWeek dayOfWeek, LocalTime openTime,
-      LocalTime closeTime) {
+  public RestaurantOperatingHours(
+      UUID restaurantId,
+      DayOfWeek dayOfWeek,
+      String openTime,
+      String closeTime
+    ) {
     this.restaurantId = restaurantId;
     this.dayOfWeek = dayOfWeek;
     this.openTime = openTime;
@@ -40,9 +51,14 @@ public class RestaurantOperatingHours {
   }
 
   @Builder(builderClassName = "UpdateRestaurantOperatingHourBuilder", builderMethodName = "updateRestaurantOperatingHour")
-  public RestaurantOperatingHours(UUID id, UUID restaurantId,
-      DayOfWeek dayOfWeek, LocalTime openTime,
-      LocalTime closeTime, LocalDateTime createdAt) {
+  public RestaurantOperatingHours(
+      UUID id,
+      UUID restaurantId,
+      DayOfWeek dayOfWeek,
+      String openTime,
+      String closeTime,
+      LocalDateTime createdAt
+    ) {
     this.id = id;
     this.restaurantId = restaurantId;
     this.dayOfWeek = dayOfWeek;

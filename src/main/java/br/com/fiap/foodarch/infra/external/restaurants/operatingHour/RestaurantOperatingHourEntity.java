@@ -7,6 +7,8 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
@@ -18,6 +20,7 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "operating_hours")
+@ToString
 public class RestaurantOperatingHourEntity {
 
   @Id
@@ -29,11 +32,14 @@ public class RestaurantOperatingHourEntity {
   private RestaurantEntity restaurant;
 
   @Column(name = "day_of_week")
+  @Enumerated(EnumType.STRING) // Ensure the enum is stored as a string
   private DayOfWeek dayOfWeek;
 
+  @JsonFormat(pattern = "HH:mm:ss")
   @Column(name = "open_time")
   private LocalTime openTime;
 
+  @JsonFormat(pattern = "HH:mm:ss")
   @Column(name = "close_time")
   private LocalTime closeTime;
 

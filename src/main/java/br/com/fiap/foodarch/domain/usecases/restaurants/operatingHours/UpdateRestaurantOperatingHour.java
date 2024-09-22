@@ -8,26 +8,25 @@ import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.Restaura
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.operatingHour.RestaurantOperatingHourRepository;
 import br.com.fiap.foodarch.application.gateways.interfaces.users.UserRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
-import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.CreateRestaurantOperatingHourFactory;
 import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.RestaurantOperatingHours;
+import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.UpdateRestaurantOperatingHourFactory;
 import br.com.fiap.foodarch.domain.entities.users.User;
 import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantNotFound;
-import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantOperatingHourAlreadyExistsException;
 import br.com.fiap.foodarch.domain.exceptions.users.UserNotExistsException;
 import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
 import br.com.fiap.foodarch.domain.records.restaurants.operatingHour.RestaurantOperatingHourInput;
 
-public class CreateRestaurantOperatingHour {
+public class UpdateRestaurantOperatingHour {
   private final RestaurantOperatingHourRepository repository;
   private final UserRepository userRepository;
   private final RestaurantRepository restaurantRepository;
-  private final CreateRestaurantOperatingHourFactory factory;
+  private final UpdateRestaurantOperatingHourFactory factory;
 
-  public CreateRestaurantOperatingHour(
+  public UpdateRestaurantOperatingHour(
       RestaurantOperatingHourRepository repository,
       UserRepository userRepository,
       RestaurantRepository restaurantRepository,
-      CreateRestaurantOperatingHourFactory factory) {
+      UpdateRestaurantOperatingHourFactory factory) {
     this.repository = repository;
     this.userRepository = userRepository;
     this.restaurantRepository = restaurantRepository;
@@ -35,38 +34,39 @@ public class CreateRestaurantOperatingHour {
   }
 
   public RestaurantOperatingHours execute(
-    UUID restaurantId,
-    UUID ownerId,
-    RestaurantOperatingHourInput restaurantOperatingHourInput
-  ) {
+      UUID restaurantId,
+      UUID ownerId,
+      RestaurantOperatingHourInput restaurantOperatingHourInput
+    ) {
 
+    RestaurantOperatingHours restaurantOperatingHourToUpdate = repository.findByRestaurantId(restaurantId);
+      
     User userTo = this.userRepository.findById(ownerId);
 
     if (userTo.getId() == null) {
       throw new UserNotExistsException("User not exists", HttpStatus.BAD_REQUEST);
     }
 
-    Restaurant restaurant = this.restaurantRepository.findById(restaurantId);
+    Restaurant restaurant = this.restaurantRepository.findById(restaurantOperatingHourInput.restaurantId());
 
     if (restaurant.getId() == null) {
       throw new RestaurantNotFound("Restaurant not found", HttpStatus.BAD_REQUEST);
     }
-    
-    if(!restaurant.getOwnerId().equals(ownerId)) {
+
+    if (!restaurant.getOwnerId().equals(ownerId)) {
       throw new UserUnauthorizedException("User not authorized", HttpStatus.UNAUTHORIZED);
     }
 
-    // if(repository.findByRestaurantId(restaurantId) != null) {
-    //   throw new RestaurantOperatingHourAlreadyExistsException("Restaurant operating hour already exists", HttpStatus.BAD_REQUEST);
-    // }
-
-    RestaurantOperatingHours restaurantOperatingHours = factory.createRestaurantOperatingHour(
-        restaurantOperatingHourInput.restaurantId(),
+    RestaurantOperatingHours restaurantOperatingHours = factory.updateRestaurantOperatingHour(
+        restaurantOperatingHourToUpdate.getId(),
+        restaurantOperatingHourToUpdate.getRestaurantId(),
         restaurantOperatingHourInput.dayOfWeek(),
         restaurantOperatingHourInput.openTime(),
-        restaurantOperatingHourInput.closeTime());
+        restaurantOperatingHourInput.closeTime(),
+        restaurantOperatingHourToUpdate.getCreatedAt()
+      );
 
-    return repository.createRestaurantOperatingHour(restaurantOperatingHours, restaurantOperatingHourInput.restaurantId());
+    return repository.updateRestaurantOperatingHour(restaurantOperatingHours,
+        restaurantOperatingHourInput.restaurantId());
   }
-
 }

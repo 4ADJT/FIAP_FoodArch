@@ -8,6 +8,7 @@ import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantRe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -34,6 +35,10 @@ public class JpaRestaurantOperatingHourRepository implements RestaurantOperating
 
     RestaurantOperatingHourEntity restaurantOperatingHourEntity = mapper.toEntity(restaurantOperatingHour,
         restaurantRef);
+
+    System.out.println(restaurantOperatingHourEntity.toString());
+
+    System.out.println("aqu");
 
     RestaurantOperatingHourEntity toSave = repository.save(restaurantOperatingHourEntity);
 

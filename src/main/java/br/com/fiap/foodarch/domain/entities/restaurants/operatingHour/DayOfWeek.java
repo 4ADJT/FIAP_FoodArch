@@ -6,13 +6,13 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum DayOfWeek {
-  SUNDAY("Sunday"),
-  MONDAY("Monday"),
-  TUESDAY("Tuesday"),
-  WEDNESDAY("Wednesday"),
-  THURSDAY("Thursday"),
-  FRIDAY("Friday"),
-  SATURDAY("Saturday");
+  Sunday("Sunday"),
+  Monday("Monday"),
+  Tuesday("Tuesday"),
+  Wednesday("Wednesday"),
+  Thursday("Thursday"),
+  Friday("Friday"),
+  Saturday("Saturday");
 
   private final String value;
 
