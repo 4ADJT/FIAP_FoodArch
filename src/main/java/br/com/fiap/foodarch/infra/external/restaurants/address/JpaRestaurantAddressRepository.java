@@ -2,10 +2,12 @@ package br.com.fiap.foodarch.infra.external.restaurants.address;
 
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.address.RestaurantAddressRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.address.RestaurantAddresses;
+import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantAddressNotFoundException;
 import br.com.fiap.foodarch.infra.external.restaurants.RestaurantEntity;
 import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantAddressRepository;
 import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -45,7 +47,13 @@ public class JpaRestaurantAddressRepository implements RestaurantAddressReposito
                                                      UUID restaurantId) {
     RestaurantEntity restaurantRef = this.restaurantRepository.getReferenceById(restaurantId);
 
+    RestaurantAddressEntity restaurantToUpdate = this.repository.findByRestaurantId(restaurantId);
+
     RestaurantAddressEntity restaurantAddressEntity = mapper.toEntity(restaurantAddress, restaurantRef);
+
+    restaurantAddressEntity.setRestaurant(restaurantToUpdate.getRestaurant());
+    restaurantAddressEntity.setId(restaurantToUpdate.getId());
+    restaurantAddressEntity.setCreated_at(restaurantToUpdate.getCreated_at());
 
     RestaurantAddressEntity toSave = repository.save(restaurantAddressEntity);
 
@@ -54,9 +62,14 @@ public class JpaRestaurantAddressRepository implements RestaurantAddressReposito
 
   @Override
   public RestaurantAddresses findByRestaurantId(UUID restaurantId) {
+
     RestaurantAddressEntity restaurantAddressEntity = this.repository.findByRestaurantId(restaurantId);
 
-    return restaurantAddressEntity != null ? mapper.toDomain(restaurantAddressEntity) : null;
+    if (restaurantAddressEntity == null) {
+      return null;
+    }
+
+    return mapper.toDomain(restaurantAddressEntity);
   }
 
   @Override
