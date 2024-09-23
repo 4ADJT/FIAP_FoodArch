@@ -2,12 +2,10 @@ package br.com.fiap.foodarch.infra.external.restaurants.address;
 
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.address.RestaurantAddressRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.address.RestaurantAddresses;
-import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantAddressNotFoundException;
 import br.com.fiap.foodarch.infra.external.restaurants.RestaurantEntity;
 import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantAddressRepository;
 import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;

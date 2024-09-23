@@ -1,6 +1,5 @@
 package br.com.fiap.foodarch.infra.external.restaurants.address;
 
-import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
 import br.com.fiap.foodarch.domain.entities.restaurants.address.RestaurantAddresses;
 import br.com.fiap.foodarch.infra.external.restaurants.RestaurantEntity;
 
