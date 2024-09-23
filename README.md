@@ -1,3 +1,6 @@
+[![Docker Image CI](https://github.com/4ADJT/FIAP_FoodArch/actions/workflows/docker-image.yml/badge.svg)](https://github.com/4ADJT/FIAP_FoodArch/actions/workflows/docker-image.yml)
+[![SonarCloud](https://github.com/4ADJT/FIAP_FoodArch/actions/workflows/build.yml/badge.svg)](https://github.com/4ADJT/FIAP_FoodArch/actions/workflows/build.yml)
+
 # FoodArch
 
 Bem-vindo ao **FoodArch**! 🍽️
@@ -25,7 +28,7 @@ O **FoodArch** é uma plataforma desenvolvida em Java com **Spring Boot** e Mave
 
    - Restaurantes podem criar um perfil detalhado, incluindo:
       - Nome do estabelecimento
-      - Localização e mapa
+      - Localização
       - Tipo de cozinha (italiana, japonesa, brasileira, etc.)
       - Horários de funcionamento
       - Capacidade de atendimento
@@ -42,7 +45,7 @@ O **FoodArch** é uma plataforma desenvolvida em Java com **Spring Boot** e Mave
 
    - Encontre o lugar perfeito com nossas ferramentas de busca e filtros:
       - Pesquise por nome
-      - Filtre por localização próxima
+      - Filtre por localização
       - Escolha o tipo de cozinha que mais agrada ao seu paladar
 
 5. **Gerenciamento de Reservas**
