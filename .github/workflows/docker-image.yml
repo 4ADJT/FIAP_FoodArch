@@ -2,27 +2,35 @@ name: Docker Image CI
 
 on:
   push:
-    branches:
-      - main  # ou a branch de sua escolha
-  pull_request:
-    branches:
-      - main
+    tags:
+      - 'v*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Necessário para obter todas as tags e histórico
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+      - name: Verify tag is from main branch
+        run: |
+          git fetch origin main
+          if [ "$(git rev-list -n 1 origin/main)" != "$(git rev-list -n 1 $GITHUB_SHA)" ]; then
+            echo "Tag was not created from the main branch. Exiting."
+            exit 1
+          fi
 
-    - name: Build the Docker image
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:1.0.0 -t ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:latest .
-    
-    - name: Push the Docker image
-      run: |
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:1.0.0
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:latest
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Build the Docker image
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:latest .
+
+      - name: Push the Docker image
+        run: |
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:latest ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/fiap_foodarch:${{ github.ref_name }}
