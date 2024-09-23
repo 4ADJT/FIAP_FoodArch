@@ -10,10 +10,11 @@ public class RestaurantOperatingHourMapper {
   // Método para converter do domínio para a entidade de banco de dados
   public RestaurantOperatingHourEntity toEntity(RestaurantOperatingHours operatingHour, RestaurantEntity restaurant) {
     return new RestaurantOperatingHourEntity(
-        operatingHour.getDayOfWeek(),
-        LocalTime.parse(operatingHour.getOpenTime()), // Formata openTime como String
-        LocalTime.parse(operatingHour.getCloseTime()), // Formata closeTime como String
-        restaurant);
+      operatingHour.getDayOfWeek(),
+      LocalTime.parse(operatingHour.getOpenTime()),
+      LocalTime.parse(operatingHour.getCloseTime()),
+      restaurant
+    );
   }
 
   // Método para converter da entidade de banco de dados para o domínio
