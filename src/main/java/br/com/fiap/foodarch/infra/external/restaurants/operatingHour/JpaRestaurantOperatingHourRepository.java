@@ -2,7 +2,6 @@ package br.com.fiap.foodarch.infra.external.restaurants.operatingHour;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +49,13 @@ public class JpaRestaurantOperatingHourRepository implements RestaurantOperating
 
     RestaurantEntity restaurantRef = this.restaurantRepository.getReferenceById(restaurantId);
 
+    RestaurantOperatingHourEntity restaurantOperatingHourEntityToUpdate = this.repository.findByRestaurantIdAndDayOfWeek(restaurantId, restaurantOperatingHour.getDayOfWeek());
+
     RestaurantOperatingHourEntity restaurantOperatingHourEntity = mapper.toEntity(restaurantOperatingHour,
-        restaurantRef);
+        restaurantRef);  
+    restaurantOperatingHourEntity.setId(restaurantOperatingHourEntityToUpdate.getId());
+    restaurantOperatingHourEntity.setRestaurant(restaurantOperatingHourEntityToUpdate.getRestaurant());
+    restaurantOperatingHourEntity.setCreatedAt(restaurantOperatingHourEntityToUpdate.getCreatedAt());
 
     RestaurantOperatingHourEntity toSave = repository.save(restaurantOperatingHourEntity);
 
