@@ -5,7 +5,6 @@ import br.com.fiap.foodarch.domain.records.users.UserOutput;
 import br.com.fiap.foodarch.domain.usecases.users.ListUsers;
 import br.com.fiap.foodarch.domain.entities.users.User;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.SchemaProperties;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
@@ -15,9 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/users")

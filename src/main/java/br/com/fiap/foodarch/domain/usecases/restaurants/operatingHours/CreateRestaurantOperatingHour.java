@@ -16,7 +16,6 @@ import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantOperatingHou
 import br.com.fiap.foodarch.domain.exceptions.users.UserNotExistsException;
 import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
 import br.com.fiap.foodarch.domain.records.restaurants.operatingHour.RestaurantOperatingHourInput;
-import jakarta.transaction.Transactional;
 
 public class CreateRestaurantOperatingHour {
   private final RestaurantOperatingHourRepository repository;
