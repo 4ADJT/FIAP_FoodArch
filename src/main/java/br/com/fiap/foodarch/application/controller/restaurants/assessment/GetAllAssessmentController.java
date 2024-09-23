@@ -32,7 +32,7 @@ public class GetAllAssessmentController {
 
     @GetMapping
     @Operation(summary = "GetAllAssessment", description = "get all assessment to FoodArch")
-    public ResponseEntity<Page<RestaurantAssessmentOutput>> createAssessment(
+    public ResponseEntity<Page<RestaurantAssessmentOutput>> getAllAssessment(
             @ParameterObject
             @PageableDefault(size = 10, page = 0) Pageable pageable
     ) {

@@ -28,7 +28,7 @@ public class GetAssessmentController {
 
     @GetMapping("/{id}")
     @Operation(summary = "GetAssessment", description = "get assessment by id to FoodArch")
-    public ResponseEntity<RestaurantAssessmentOutput> createAssessment(
+    public ResponseEntity<RestaurantAssessmentOutput> getAssessment(
             @PathVariable UUID id
     ) {
         RestaurantAssessment assessment = getRestaurantAssessmentById.execute(id);
