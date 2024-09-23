@@ -66,6 +66,7 @@ public class RestaurantOperatingHours {
     this.dayOfWeek = dayOfWeek;
     this.openTime = openTime;
     this.closeTime = closeTime;
+    this.createdAt = createdAt;
   }
 
   @PrePersist
