@@ -24,13 +24,13 @@ public class DatabaseHealthCheckService {
   @Scheduled(fixedRate = 300000)
   public void checkDatabaseConnection() {
     try (Connection connection = dataSource.getConnection()) {
-      if (connection.isValid(2)) {
-        logger.info("Database connection is healthy.");
+      if (connection.isValid(30)) {
+        logger.info("\n - Database connection is healthy. \n");
       } else {
-        logger.warn("Database connection is not healthy.");
+        logger.warn("\n - Database connection is not healthy. \n");
       }
     } catch (SQLException e) {
-      logger.error("Error checking database connection: ", e);
+      logger.error("\\n - Error checking database connection: ", e);
     }
   }
 }
