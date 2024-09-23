@@ -24,7 +24,7 @@ public class DatabaseHealthCheckService {
   @Scheduled(fixedRate = 300000)
   public void checkDatabaseConnection() {
     try (Connection connection = dataSource.getConnection()) {
-      if (connection.isValid(30)) {
+      if (connection.isValid(20)) {
         logger.info("\n - Database connection is healthy. \n");
       } else {
         logger.warn("\n - Database connection is not healthy. \n");
