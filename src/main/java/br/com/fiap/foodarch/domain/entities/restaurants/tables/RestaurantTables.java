@@ -13,26 +13,33 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class RestaurantTables {
-  private UUID id;
+    private UUID id;
 
-  private UUID restaurantId;
+    private UUID restaurantId;
 
-  private int tableNumber;
+    private int tableNumber;
 
-  private boolean available;
+    private boolean available;
 
-  private LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
-  private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
-  @PrePersist
-  protected void onCreate() {
-    createdAt = LocalDateTime.now();
-    updatedAt = LocalDateTime.now();
-  }
+    @Builder(builderClassName = "CreateRestaurantTable", builderMethodName = "createRestaurantTable")
+    public RestaurantTables(UUID restaurantId, int tableNumber, boolean available) {
+        this.restaurantId = restaurantId;
+        this.tableNumber = tableNumber;
+        this.available = available;
+    }
 
-  @PreUpdate
-  protected void onUpdate() {
-    updatedAt = LocalDateTime.now();
-  }
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }
