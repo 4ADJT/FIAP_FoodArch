@@ -16,6 +16,7 @@ import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantOperatingHou
 import br.com.fiap.foodarch.domain.exceptions.users.UserNotExistsException;
 import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
 import br.com.fiap.foodarch.domain.records.restaurants.operatingHour.RestaurantOperatingHourInput;
+import jakarta.transaction.Transactional;
 
 public class CreateRestaurantOperatingHour {
   private final RestaurantOperatingHourRepository repository;
@@ -35,10 +36,9 @@ public class CreateRestaurantOperatingHour {
   }
 
   public RestaurantOperatingHours execute(
-    UUID restaurantId,
-    UUID ownerId,
-    RestaurantOperatingHourInput restaurantOperatingHourInput
-  ) {
+      UUID restaurantId,
+      UUID ownerId,
+      RestaurantOperatingHourInput restaurantOperatingHourInput) {
 
     User userTo = this.userRepository.findById(ownerId);
 
@@ -51,14 +51,16 @@ public class CreateRestaurantOperatingHour {
     if (restaurant.getId() == null) {
       throw new RestaurantNotFound("Restaurant not found", HttpStatus.BAD_REQUEST);
     }
-    
-    if(!restaurant.getOwnerId().equals(ownerId)) {
+
+    if (!restaurant.getOwnerId().equals(ownerId)) {
       throw new UserUnauthorizedException("User not authorized", HttpStatus.UNAUTHORIZED);
     }
 
-    // if(repository.findByRestaurantId(restaurantId) != null) {
-    //   throw new RestaurantOperatingHourAlreadyExistsException("Restaurant operating hour already exists", HttpStatus.BAD_REQUEST);
-    // }
+    if (this.repository.findByRestaurantIdAndDayOfWeek(restaurantId,
+        restaurantOperatingHourInput.dayOfWeek()) != null) {
+      throw new RestaurantOperatingHourAlreadyExistsException("Restaurant operating hour already exists",
+          HttpStatus.BAD_REQUEST);
+    }
 
     RestaurantOperatingHours restaurantOperatingHours = factory.createRestaurantOperatingHour(
         restaurantOperatingHourInput.restaurantId(),
@@ -66,7 +68,8 @@ public class CreateRestaurantOperatingHour {
         restaurantOperatingHourInput.openTime(),
         restaurantOperatingHourInput.closeTime());
 
-    return repository.createRestaurantOperatingHour(restaurantOperatingHours, restaurantOperatingHourInput.restaurantId());
+    return repository.createRestaurantOperatingHour(restaurantOperatingHours,
+        restaurantOperatingHourInput.restaurantId());
   }
 
 }

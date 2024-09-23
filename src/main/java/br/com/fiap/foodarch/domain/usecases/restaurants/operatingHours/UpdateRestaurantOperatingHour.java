@@ -1,5 +1,6 @@
 package br.com.fiap.foodarch.domain.usecases.restaurants.operatingHours;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
 import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.RestaurantOperatingHours;
 import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.UpdateRestaurantOperatingHourFactory;
 import br.com.fiap.foodarch.domain.entities.users.User;
+import br.com.fiap.foodarch.domain.exceptions.NothingToUpdate;
 import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantNotFound;
 import br.com.fiap.foodarch.domain.exceptions.users.UserNotExistsException;
 import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
@@ -39,7 +41,18 @@ public class UpdateRestaurantOperatingHour {
       RestaurantOperatingHourInput restaurantOperatingHourInput
     ) {
 
-    RestaurantOperatingHours restaurantOperatingHourToUpdate = repository.findByRestaurantId(restaurantId);
+    List<RestaurantOperatingHours> restaurantOperatingHours = repository.findByRestaurantId(restaurantId);
+
+    RestaurantOperatingHours restaurantOperatingHourToUpdate = null;
+    for (RestaurantOperatingHours restaurantOperatingHour : restaurantOperatingHours) {
+      if (restaurantOperatingHour.getDayOfWeek() == restaurantOperatingHourInput.dayOfWeek()) {
+        restaurantOperatingHourToUpdate = restaurantOperatingHour;
+      }
+    }
+
+    if (restaurantOperatingHourToUpdate == null) {
+      throw new NothingToUpdate("Nothing to update", HttpStatus.BAD_REQUEST);
+    }
       
     User userTo = this.userRepository.findById(ownerId);
 
@@ -57,7 +70,7 @@ public class UpdateRestaurantOperatingHour {
       throw new UserUnauthorizedException("User not authorized", HttpStatus.UNAUTHORIZED);
     }
 
-    RestaurantOperatingHours restaurantOperatingHours = factory.updateRestaurantOperatingHour(
+    RestaurantOperatingHours reponseRestaurantOperatingHours = factory.updateRestaurantOperatingHour(
         restaurantOperatingHourToUpdate.getId(),
         restaurantOperatingHourToUpdate.getRestaurantId(),
         restaurantOperatingHourInput.dayOfWeek(),
@@ -66,7 +79,8 @@ public class UpdateRestaurantOperatingHour {
         restaurantOperatingHourToUpdate.getCreatedAt()
       );
 
-    return repository.updateRestaurantOperatingHour(restaurantOperatingHours,
+    return repository.updateRestaurantOperatingHour(
+        reponseRestaurantOperatingHours,
         restaurantOperatingHourInput.restaurantId());
   }
 }

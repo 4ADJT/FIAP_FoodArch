@@ -1,5 +1,7 @@
 package br.com.fiap.foodarch.application.controller.restaurants.operatingHour;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springdoc.core.annotations.ParameterObject;
@@ -28,13 +30,17 @@ public class GetRestaurantOperatingHourByIdController {
 
   @GetMapping("/{restaurantId}")
   @Operation(summary = "Get restaurant operating hour by id", description = "Get restaurant operating hour by id from FoodArch.")
-  public ResponseEntity<RestaurantOperatingHourOutput> getRestaurantAddressById(
+  public ResponseEntity<List<RestaurantOperatingHourOutput>> getRestaurantAddressById(
       @ParameterObject
       @PathVariable UUID restaurantId
   ) {
     
-    RestaurantOperatingHours address = getRestaurantById.execute(restaurantId);
+    List<RestaurantOperatingHours> restaurantOperationgHours = getRestaurantById.execute(restaurantId);
+    List<RestaurantOperatingHourOutput> responses = new ArrayList<>();
+    for (RestaurantOperatingHours restaurantOperatingHours : restaurantOperationgHours) {
+      responses.add(RestaurantOperatingHourPresenter.restaurantOperatingHourResponse(restaurantOperatingHours));
+    }
 
-    return ResponseEntity.ok(RestaurantOperatingHourPresenter.restaurantOperatingHourResponse(address));
-  }
+    return ResponseEntity.ok(responses);
+    }
 }

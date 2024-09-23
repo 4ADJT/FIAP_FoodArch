@@ -1,5 +1,6 @@
 package br.com.fiap.foodarch.application.gateways.interfaces.restaurants.operatingHour;
 
+import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.DayOfWeek;
 import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.RestaurantOperatingHours;
 
 import java.util.List;
@@ -10,7 +11,9 @@ public interface RestaurantOperatingHourRepository {
 
   RestaurantOperatingHours updateRestaurantOperatingHour(RestaurantOperatingHours restaurantOperatingHour, UUID restaurantId);
 
-  RestaurantOperatingHours findByRestaurantId(UUID restaurantId);
+  List<RestaurantOperatingHours> findByRestaurantId(UUID restaurantId);
+
+  RestaurantOperatingHours findByRestaurantIdAndDayOfWeek(UUID restaurantId, DayOfWeek dayOfWeek);
 
   void deleteById(UUID id);
 }

@@ -41,20 +41,20 @@ CREATE TABLE restaurant_kitchens (
                                      UNIQUE (restaurant_id, kitchen_id)
 );
 
-CREATE TYPE day_of_week AS ENUM (
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
+CREATE TYPE day_of_week_enum AS ENUM (
+    'SUNDAY',
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY'
     );
 
 CREATE TABLE operating_hours (
                                  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
                                  restaurant_id UUID NOT NULL REFERENCES restaurants(id) ON DELETE CASCADE,
-                                 day_of_week day_of_week NOT NULL,
+                                 day_of_week day_of_week_enum NOT NULL,
                                  open_time TIME NOT NULL,
                                  close_time TIME NOT NULL,
                                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -1,5 +1,6 @@
 package br.com.fiap.foodarch.domain.usecases.restaurants.operatingHours;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.operatingHour.RestaurantOperatingHourRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.RestaurantOperatingHours;
 import br.com.fiap.foodarch.domain.exceptions.restaurants.RestaurantOperatingHourNotFoundException;
+import jakarta.transaction.Transactional;
 
 public class GetRestaurantOperatingHourById {
   private final RestaurantOperatingHourRepository repository;
@@ -15,7 +17,8 @@ public class GetRestaurantOperatingHourById {
     this.repository = repository;
   }
 
-  public RestaurantOperatingHours execute(UUID restaurantId) {
+  @Transactional
+  public List<RestaurantOperatingHours> execute(UUID restaurantId) {
     if(restaurantId == null) {
       throw new IllegalArgumentException("Restaurant id is required");
     }
