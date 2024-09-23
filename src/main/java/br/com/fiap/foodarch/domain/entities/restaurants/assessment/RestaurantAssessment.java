@@ -15,6 +15,8 @@ import java.util.UUID;
 public class RestaurantAssessment {
   private UUID id;
 
+  private UUID userId;
+
   private UUID restaurantId;
 
   private String comment;
@@ -26,6 +28,24 @@ public class RestaurantAssessment {
   private LocalDateTime createdAt;
 
   private LocalDateTime updatedAt;
+
+  @Builder(builderClassName = "CreateAssessmentBuilder", builderMethodName = "createAssessment")
+  public RestaurantAssessment(final UUID userId, final UUID restaurantId, final String comment, final boolean like, final int stars) {
+    this.userId = userId;
+    this.restaurantId = restaurantId;
+    this.comment = comment;
+    this.like = like;
+    this.stars = stars;
+  }
+
+  @Builder(builderClassName = "UpdateAssessmentBuilder", builderMethodName = "updateAssessment")
+  public RestaurantAssessment(UUID id, String comment, boolean like, int stars) {
+    this.id = id;
+    this.comment = comment;
+    this.like = like;
+    this.stars = stars;
+  }
+
 
   @PrePersist
   protected void onCreate() {
