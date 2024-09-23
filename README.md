@@ -163,6 +163,6 @@ _Aproveite sua experiência com o **FoodArch** e descubra um mundo de sabores ao
 
 **Link do Repositório:** [https://github.com/4ADJT/FIAP_FoodArch](https://github.com/4ADJT/FIAP_FoodArch)
 
-**Live Preview:** [https://fiap-foodarch.onrender.com/](https://fiap-foodarch.onrender.com/)
+**Live Preview:** [https://foodarch.onrender.com](https://foodarch.onrender.com)
 
 ---
