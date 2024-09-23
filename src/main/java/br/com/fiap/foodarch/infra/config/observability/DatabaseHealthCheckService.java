@@ -30,7 +30,7 @@ public class DatabaseHealthCheckService {
         logger.warn("\n - Database connection is not healthy. \n");
       }
     } catch (SQLException e) {
-      logger.error("\\n - Error checking database connection: ", e);
+      logger.error("\n - Error checking database connection: ", e);
     }
   }
 }
