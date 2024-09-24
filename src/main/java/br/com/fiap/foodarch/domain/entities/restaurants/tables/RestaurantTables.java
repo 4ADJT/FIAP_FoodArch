@@ -32,6 +32,14 @@ public class RestaurantTables {
         this.available = available;
     }
 
+    @Builder(builderClassName = "UpdateRestaurantTable", builderMethodName = "updateRestaurantTable")
+    public RestaurantTables(UUID id, UUID restaurantId, int tableNumber, boolean available) {
+        this.id = id;
+        this.restaurantId = restaurantId;
+        this.tableNumber = tableNumber;
+        this.available = available;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

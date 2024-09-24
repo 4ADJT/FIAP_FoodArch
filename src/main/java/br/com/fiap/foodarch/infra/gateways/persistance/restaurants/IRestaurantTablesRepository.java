@@ -1,2 +1,9 @@
-package br.com.fiap.foodarch.infra.gateways.persistance.restaurants;public interface IRestaurantTablesRepository {
+package br.com.fiap.foodarch.infra.gateways.persistance.restaurants;
+
+import br.com.fiap.foodarch.infra.external.restaurants.tables.RestaurantTablesEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+public interface IRestaurantTablesRepository extends JpaRepository<RestaurantTablesEntity, UUID> {
 }
