@@ -28,8 +28,8 @@ public class GetRestauranttablesController {
 
     @GetMapping("/{tableId}")
     @Operation(summary = "Get restaurant table by id", description = "Get restaurant table by id from FoodArch.")
-    public ResponseEntity<RestaurantTablesOutput> getRestaurantTableById(@ParameterObject @PathVariable UUID tableId) {
-        RestaurantTables tables = getRestaurantTablesById.execute(tableId);
+    public ResponseEntity<RestaurantTablesOutput> getRestaurantTableById(@ParameterObject @PathVariable int tableNumber) {
+        RestaurantTables tables = getRestaurantTablesById.execute(tableNumber);
 
         return ResponseEntity.ok(RestaurantTablesPresenter.response(tables));
 

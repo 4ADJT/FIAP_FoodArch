@@ -34,15 +34,20 @@ public class JpaRestaurantTablesRepository implements RestaurantTablesRepository
     @Override
     public RestaurantTables updateRestaurantTables(RestaurantTables restaurantTables, UUID restaurantId) {
         RestaurantEntity restaurant = this.restaurantRepository.getReferenceById(restaurantId);
-        RestaurantTablesEntity restaurantTablesEntityToUpdate = this.tablesRepository.findByRestaurantAndTableId(restaurantId, restaurantTables.getId());
+        RestaurantTablesEntity restaurantTablesEntityToUpdate = this.tablesRepository.findByRestaurantAndTableId(restaurant.getId(), restaurantTables.getId());
+
+        if (restaurantTablesEntityToUpdate == null) {
+            return null; // pode ser um throw de exceção
+        }
+
         RestaurantTablesEntity restaurantTablesEntity = tablesMapper.toEntity(restaurantTables, restaurant);
         return tablesMapper.toDomain(tablesRepository.save(restaurantTablesEntity));
     }
 
 
     @Override
-    public RestaurantTables findByRestaurantTableNumber(UUID tableId) {
-        RestaurantTablesEntity restaurantTablesEntity = this.tablesRepository.findByTableNumber(tableId);
+    public RestaurantTables findByRestaurantTableNumber(int tableNumber) {
+        RestaurantTablesEntity restaurantTablesEntity = this.tablesRepository.findByTableNumber(tableNumber);
         if (restaurantTablesEntity == null) {
             return null;
         }
@@ -51,8 +56,8 @@ public class JpaRestaurantTablesRepository implements RestaurantTablesRepository
     }
 
     @Override
-    public RestaurantTables findByRestaurantId(RestaurantTables restaurantTables, UUID restaurantId) {
-        RestaurantTablesEntity restaurantTablesEntity = this.tablesRepository.findByRestaurantAndTableId(restaurantId, restaurantTables.getId());
+    public RestaurantTables findByRestaurantId(UUID restaurantTablesId, UUID restaurantId) {
+        RestaurantTablesEntity restaurantTablesEntity = this.tablesRepository.findByRestaurantAndTableId(restaurantId, restaurantTablesId);
         if (restaurantTablesEntity == null) {
             return null;
         }

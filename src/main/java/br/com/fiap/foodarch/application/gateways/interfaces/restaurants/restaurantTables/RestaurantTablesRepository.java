@@ -9,11 +9,11 @@ public interface RestaurantTablesRepository {
 
     RestaurantTables createRestaurantTables(UUID restaurantId, RestaurantTables restaurantTables);
 
-    RestaurantTables findByRestaurantTableNumber(UUID tableId);
+    RestaurantTables findByRestaurantTableNumber(int tableNumber);
 
-    RestaurantTables findByRestaurantId(RestaurantTables restaurantTables, UUID restaurantId);
+    RestaurantTables findByRestaurantId(UUID restaurantTablesId, UUID restaurantId);
 
     void deleteById(UUID id);
 
-    RestaurantTables updateRestaurantTables(RestaurantTables tables, UUID uuid);
+    RestaurantTables updateRestaurantTables(RestaurantTables restaurantTables, UUID restaurantId);
 }

@@ -29,9 +29,9 @@ public class UpdateRestaurantTable {
         this.restaurantTableFactory = restaurantTableFactory;
     }
 
-    public RestaurantTables execute(UUID restaurantId, UUID restaurantTableId, UUID ownerId, RestaurantTablesInput restaurantTablesInput) {
+    public RestaurantTables execute(UUID restaurantId, RestaurantTablesInput restaurantTablesInput, UUID ownerId) {
 
-        RestaurantTables restaurantTablesUpdate = restaurantTablesRepository.findByRestaurantId(restaurantTableId, restaurantId);
+        RestaurantTables restaurantTablesUpdate = restaurantTablesRepository.findByRestaurantId(restaurantTablesInput.id(), restaurantId);
 
         User userTo = this.userRepository.findById(ownerId);
 

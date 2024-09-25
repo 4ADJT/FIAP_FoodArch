@@ -9,11 +9,11 @@ import java.util.UUID;
 
 public interface IRestaurantTablesRepository extends JpaRepository<RestaurantTablesEntity, UUID> {
 
-    @Query("SELECT r FROM RestaurantTablesEntity r WHERE r.restaurant.id = ?1")
+    @Query("SELECT r FROM RestaurantTablesEntity r WHERE r.restaurant.id = :restaurantId")
     List<RestaurantTablesEntity> findByRestaurantId(UUID restaurantId);
 
-    @Query("SELECT t from RestaurantTablesEntity t where t.restaurant.id = :restaurantId and t.tableNumber = :tableNumber")
-    RestaurantTablesEntity findByRestaurantAndTableId(UUID restaurantId, UUID tableNumber);
+    @Query("SELECT t from RestaurantTablesEntity t where t.restaurant.id = :restaurantId and t.id = :tableId")
+    RestaurantTablesEntity findByRestaurantAndTableId(UUID restaurantId, UUID tableId);
 
-    RestaurantTablesEntity findByTableNumber(UUID tableId);
+    RestaurantTablesEntity findByTableNumber(int tableNumber);
 }

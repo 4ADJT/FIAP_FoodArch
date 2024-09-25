@@ -14,8 +14,8 @@ public class GetRestaurantTablesById {
         this.restaurantTablesRepository = restaurantTablesRepository;
     }
 
-    public RestaurantTables execute(UUID tableNumber) {
-        if (tableNumber == null) {
+    public RestaurantTables execute(int tableNumber) {
+        if (tableNumber < 0) {
             throw new IllegalArgumentException("Table number cannot be null");
         }
 

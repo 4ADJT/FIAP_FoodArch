@@ -25,8 +25,17 @@ public class UpdateRestaurantTableController {
 
     @PutMapping("/{restaurantId}/{restaurantTableId}")
     @Operation(summary = "Update restaurant table", description = "Update a table for restaurant")
-    public ResponseEntity<RestaurantTablesOutput> updateRestaurantTable(@PathVariable UUID restaurantId,@PathVariable UUID restaurantTableId, @RequestParam("ownerId") UUID ownerId, @RequestBody RestaurantTablesInput restaurantTablesInput) {
-        RestaurantTables restaurantTables = updateRestaurantTable.execute(restaurantId,restaurantTableId, ownerId, restaurantTablesInput);
+    public ResponseEntity<RestaurantTablesOutput> updateRestaurantTable(
+            @PathVariable UUID restaurantId,
+            @RequestParam("ownerId") UUID ownerId,
+            @RequestBody RestaurantTablesInput restaurantTablesInput) {
+
+        RestaurantTables restaurantTables = updateRestaurantTable.execute(
+                        restaurantId,
+                        restaurantTablesInput,
+                        ownerId
+            );
+
         return ResponseEntity.status(200).body(RestaurantTablesPresenter.response(restaurantTables));
     }
 
