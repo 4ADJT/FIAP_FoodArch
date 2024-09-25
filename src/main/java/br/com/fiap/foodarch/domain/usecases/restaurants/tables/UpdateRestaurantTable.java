@@ -29,12 +29,9 @@ public class UpdateRestaurantTable {
         this.restaurantTableFactory = restaurantTableFactory;
     }
 
-    public RestaurantTables execute(
-            UUID restaurantId,
-            UUID ownerId,
-            RestaurantTablesInput restaurantTablesInput
-    ) {
-        RestaurantTables restaurantTablesUpdate = restaurantTablesRepository.findByRestaurantId(restaurantId);
+    public RestaurantTables execute(UUID restaurantId, UUID restaurantTableId, UUID ownerId, RestaurantTablesInput restaurantTablesInput) {
+
+        RestaurantTables restaurantTablesUpdate = restaurantTablesRepository.findByRestaurantId(restaurantTableId, restaurantId);
 
         User userTo = this.userRepository.findById(ownerId);
 
@@ -52,12 +49,7 @@ public class UpdateRestaurantTable {
             throw new UserUnauthorizedException("User not authorized", HttpStatus.UNAUTHORIZED);
         }
 
-        RestaurantTables tables = restaurantTableFactory.updaateRestaurantTables(
-                restaurantTablesUpdate.getId(),
-                restaurantTablesUpdate.getRestaurantId(),
-                restaurantTablesUpdate.getTableNumber(),
-                restaurantTablesUpdate.isAvailable()
-        );
+        RestaurantTables tables = restaurantTableFactory.updaateRestaurantTables(restaurantTablesUpdate.getId(), restaurantTablesUpdate.getRestaurantId(), restaurantTablesUpdate.getTableNumber(), restaurantTablesUpdate.isAvailable());
 
         return restaurantTablesRepository.updateRestaurantTables(tables, restaurantTablesInput.restaurantId());
     }

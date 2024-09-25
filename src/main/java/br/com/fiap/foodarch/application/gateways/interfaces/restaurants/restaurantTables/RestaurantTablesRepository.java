@@ -11,7 +11,7 @@ public interface RestaurantTablesRepository {
 
     RestaurantTables findByRestaurantTableNumber(UUID tableId);
 
-    RestaurantTables findByRestaurantId(UUID restaurantId);
+    RestaurantTables findByRestaurantId(RestaurantTables restaurantTables, UUID restaurantId);
 
     void deleteById(UUID id);
 
