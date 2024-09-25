@@ -25,12 +25,12 @@ public class DeleteAssessmentController {
 
     @DeleteMapping("/{idAssessment}/{idUser}")
     @Operation(summary = "DeleteAssessment", description = "Delete assessment to FoodArch")
-    public ResponseEntity<HttpStatus> deleteAssessment(
+    public ResponseEntity<String> deleteAssessment(
             @PathVariable UUID idAssessment, @PathVariable UUID idUser
     ) {
         restaurantDeleteAssessment.execute(idAssessment, idUser);
 
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(HttpStatus.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
