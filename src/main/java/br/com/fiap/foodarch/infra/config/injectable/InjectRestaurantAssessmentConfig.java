@@ -45,8 +45,11 @@ public class InjectRestaurantAssessmentConfig {
   }
 
   @Bean
-  public UpdateRestaurantAssessment updateAssessment(RestaurantAssessmentRepository repository) {
-    return new UpdateRestaurantAssessment(repository);
+  public UpdateRestaurantAssessment updateAssessment(
+          RestaurantAssessmentRepository repository,
+          CreateRestaurantAssessmentFactory factory
+  ) {
+    return new UpdateRestaurantAssessment(repository, factory);
   }
 
 }
