@@ -46,27 +46,7 @@
             target/site/jacoco/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.exclusions>
-            **/*DefaultController*,**
-            /*Mapper*,**
-            /*Repository*,**
-            /*Output*,**
-            /*Input*,**
-            /*Factory*,**
-            /*Presenter*,**
-            /*Entity*,**
-            /*Test*,**
-            /*Inject*,**
-            /*Exception*,**
-            /*ActuatorConfig*,**
-            /*DatabaseHealthCheckService*,**
-            /*RestaurantNotFound*,**
-            /*CepController*,**
-            /*ViaCepService*,**
-            /*FoodarchApplication*,**
-            /*Generated*.class,**
-            /infra/gateways/persistance/**,**
-            /infra/config/**,**
-            /domain/exceptions/**
+            **/*DefaultController*,**/*Mapper*,**/*Repository*,**/*Output*,**/*Input*,**/*Factory*,**/*Presenter*,**/*Entity*,**/*Test*,**/*Inject*,**/*Exception*,**/*ActuatorConfig*,**/*DatabaseHealthCheckService*,**/*RestaurantNotFound*,**/*CepController*,**/*ViaCepService*,**/*FoodarchApplication*,**/Generated*.class,**/infra/gateways/persistence/**,**/infra/config/**,**/domain/exceptions/**
         </sonar.exclusions>
     </properties>
     <dependencies>
