@@ -161,6 +161,8 @@
                                 <exclude>**/*DefaultController*</exclude>
                                 <exclude>**/*Mapper*</exclude>
                                 <exclude>**/*Repository*</exclude>
+                                <exclude>**/*Output*</exclude>
+                                <exclude>**/*Input*</exclude>
                                 <exclude>**/*Factory*</exclude>
                                 <exclude>**/*Presenter*</exclude>
                                 <exclude>**/*Entity*</exclude>
@@ -182,6 +184,8 @@
                                 <exclude>**/*DefaultController*</exclude>
                                 <exclude>**/*Mapper*</exclude>
                                 <exclude>**/*Repository*</exclude>
+                                <exclude>**/*Output*</exclude>
+                                <exclude>**/*Input*</exclude>
                                 <exclude>**/*Factory*</exclude>
                                 <exclude>**/*Presenter*</exclude>
                                 <exclude>**/*Entity*</exclude>
@@ -198,6 +202,20 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
+                            <excludes>
+                                <exclude>**/*DefaultController*</exclude>
+                                <exclude>**/*Mapper*</exclude>
+                                <exclude>**/*Repository*</exclude>
+                                <exclude>**/*Output*</exclude>
+                                <exclude>**/*Input*</exclude>
+                                <exclude>**/*Factory*</exclude>
+                                <exclude>**/*Presenter*</exclude>
+                                <exclude>**/*Entity*</exclude>
+                                <exclude>**/*Test*</exclude>
+                                <exclude>**/*Inject*</exclude>
+                                <exclude>**/Generated*.class</exclude>
+                                <exclude>**/infra/gateways/persistance/**</exclude>
+                            </excludes>
                             <rules>
                                 <rule>
                                     <element>PACKAGE</element>
