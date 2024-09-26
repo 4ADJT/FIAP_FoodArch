@@ -3,9 +3,9 @@ package br.com.fiap.foodarch.infra.config.injectable;
 import br.com.fiap.foodarch.application.controller.restaurants.kitchens.GetAllKitchenDefinitionController;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.kitchen.KitchenDefinitionRepository;
 import br.com.fiap.foodarch.domain.usecases.restaurants.kitchen.GetAllKitchenDefinitions;
-import br.com.fiap.foodarch.infra.external.restaurants.kitchen.JpaKitchenDefinitionRepository;
+
 import br.com.fiap.foodarch.infra.external.restaurants.kitchen.KitchenDefinitionMapper;
-import br.com.fiap.foodarch.infra.gateways.persistance.restaurants.IRestaurantKitchenDefinition;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -24,6 +24,20 @@ public class RestaurantKitchens {
 
   private LocalDateTime updatedAt;
 
+  @Builder(builderClassName = "CreateRestaurantKitchensBuilder", builderMethodName = "createRestaurantKitchens")
+  public RestaurantKitchens(UUID restaurantId, UUID kitchenId) {
+    this.restaurantId = restaurantId;
+    this.kitchenId = kitchenId;
+  }
+
+  @Builder(builderClassName = "UpdateRestaurantKitchensBuilder", builderMethodName = "updateRestaurantKitchens")
+  public RestaurantKitchens(UUID id, UUID restaurantId, UUID kitchenId, LocalDateTime createdAt) {
+    this.id = id;
+    this.restaurantId = restaurantId;
+    this.kitchenId = kitchenId;
+    this.createdAt = createdAt;
+  }
+
   @PrePersist
   protected void onCreate() {
     createdAt = LocalDateTime.now();
