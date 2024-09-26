@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class JpaKitchenDefinitionRepository implements KitchenDefinitionRepository {
@@ -31,6 +30,6 @@ public class JpaKitchenDefinitionRepository implements KitchenDefinitionReposito
       return List.of();
     }
 
-    return kitchens.stream().map(mapper::toDomain).collect(Collectors.toList());
+    return kitchens.stream().map(mapper::toDomain).toList();
   }
 }
