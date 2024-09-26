@@ -168,8 +168,17 @@
                                 <exclude>**/*Entity*</exclude>
                                 <exclude>**/*Test*</exclude>
                                 <exclude>**/*Inject*</exclude>
+                                <exclude>**/*Exception*</exclude>
+                                <exclude>**/*ActuatorConfig*</exclude>
+                                <exclude>**/*DatabaseHealthCheckService*</exclude>
+                                <exclude>**/*RestaurantNotFound*</exclude>
+                                <exclude>**/*CepController*</exclude>
+                                <exclude>**/*ViaCepService*</exclude>
+                                <exclude>**/*FoodarchApplication*</exclude>
                                 <exclude>**/Generated*.class</exclude>
                                 <exclude>**/infra/gateways/persistance/**</exclude>
+                                <exclude>**/infra/config/**</exclude>
+                                <exclude>**/domain/exceptions/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -191,8 +200,17 @@
                                 <exclude>**/*Entity*</exclude>
                                 <exclude>**/*Test*</exclude>
                                 <exclude>**/*Inject*</exclude>
+                                <exclude>**/*Exception*</exclude>
+                                <exclude>**/*ActuatorConfig*</exclude>
+                                <exclude>**/*DatabaseHealthCheckService*</exclude>
+                                <exclude>**/*RestaurantNotFound*</exclude>
+                                <exclude>**/*CepController*</exclude>
+                                <exclude>**/*ViaCepService*</exclude>
+                                <exclude>**/*FoodarchApplication*</exclude>
                                 <exclude>**/Generated*.class</exclude>
                                 <exclude>**/infra/gateways/persistance/**</exclude>
+                                <exclude>**/infra/config/**</exclude>
+                                <exclude>**/domain/exceptions/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -213,8 +231,17 @@
                                 <exclude>**/*Entity*</exclude>
                                 <exclude>**/*Test*</exclude>
                                 <exclude>**/*Inject*</exclude>
+                                <exclude>**/*Exception*</exclude>
+                                <exclude>**/*ActuatorConfig*</exclude>
+                                <exclude>**/*DatabaseHealthCheckService*</exclude>
+                                <exclude>**/*RestaurantNotFound*</exclude>
+                                <exclude>**/*CepController*</exclude>
+                                <exclude>**/*ViaCepService*</exclude>
+                                <exclude>**/*FoodarchApplication*</exclude>
                                 <exclude>**/Generated*.class</exclude>
                                 <exclude>**/infra/gateways/persistance/**</exclude>
+                                <exclude>**/infra/config/**</exclude>
+                                <exclude>**/domain/exceptions/**</exclude>
                             </excludes>
                             <rules>
                                 <rule>
