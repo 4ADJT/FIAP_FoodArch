@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class JpaKitchenDefinitionRepository implements KitchenDefinitionRepository {
@@ -31,5 +32,10 @@ public class JpaKitchenDefinitionRepository implements KitchenDefinitionReposito
     }
 
     return kitchens.stream().map(mapper::toDomain).toList();
+  }
+
+  @Override
+  public KitchensDefinition getById(UUID id) {
+    return this.repository.findById(id).map(mapper::toDomain).orElse(null);
   }
 }

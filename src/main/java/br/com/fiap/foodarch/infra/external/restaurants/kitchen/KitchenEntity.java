@@ -21,11 +21,11 @@ public class KitchenEntity {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "restaurant_id", nullable = false)
   private RestaurantEntity restaurant;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "kitchen_id", nullable = false)
   private KitchenDefinitionEntity kitchen;
 

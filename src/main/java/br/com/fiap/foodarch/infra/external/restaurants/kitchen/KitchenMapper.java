@@ -9,7 +9,6 @@ public class KitchenMapper {
     KitchenEntity kitchenEntity = new KitchenEntity();
     kitchenEntity.setRestaurant(restaurantEntity);
     kitchenEntity.setKitchen(kitchenDefinitionEntity);
-    kitchenEntity.setRestaurant(restaurantEntity);
 
     return kitchenEntity;
   }
