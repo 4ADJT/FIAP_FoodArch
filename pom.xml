@@ -42,11 +42,31 @@
         <java.version>17</java.version>
         <sonar.organization>brocchirodrigo</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            target/site/jacoco/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.exclusions>
+            **/*DefaultController*,**/*Mapper*,**/*Repository*,**/*Output*,**/*Input*,**/*Factory*,**/*Presenter*,**/*Entity*,**/*Test*,**/*Inject*,**/*Exception*,**/*ActuatorConfig*,**/*DatabaseHealthCheckService*,**/*RestaurantNotFound*,**/*CepController*,**/*ViaCepService*,**/*FoodarchApplication*,**/Generated*.class,**/infra/gateways/persistence/**/*,**/infra/config/**/*,**/domain/exceptions/**/*
+        </sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.12</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -116,6 +136,16 @@
             <version>5.10.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-utils-hibernate-63</artifactId>
+            <version>3.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jakarta-xmlbind-annotations</artifactId>
+            <version>2.18.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -132,7 +162,87 @@
                     </excludes>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*DefaultController*</exclude>
+                                <exclude>**/*Mapper*</exclude>
+                                <exclude>**/*Repository*</exclude>
+                                <exclude>**/*Output*</exclude>
+                                <exclude>**/*Input*</exclude>
+                                <exclude>**/*Factory*</exclude>
+                                <exclude>**/*Presenter*</exclude>
+                                <exclude>**/*Entity*</exclude>
+                                <exclude>**/*Test*</exclude>
+                                <exclude>**/*Inject*</exclude>
+                                <exclude>**/*Exception*</exclude>
+                                <exclude>**/*ActuatorConfig*</exclude>
+                                <exclude>**/*DatabaseHealthCheckService*</exclude>
+                                <exclude>**/*RestaurantNotFound*</exclude>
+                                <exclude>**/*CepController*</exclude>
+                                <exclude>**/*ViaCepService*</exclude>
+                                <exclude>**/*FoodarchApplication*</exclude>
+                                <exclude>**/Generated*.class</exclude>
+                                <exclude>**/infra/gateways/persistance/**</exclude>
+                                <exclude>**/infra/config/**</exclude>
+                                <exclude>**/domain/exceptions/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/*DefaultController*</exclude>
+                                <exclude>**/*Mapper*</exclude>
+                                <exclude>**/*Repository*</exclude>
+                                <exclude>**/*Output*</exclude>
+                                <exclude>**/*Input*</exclude>
+                                <exclude>**/*Factory*</exclude>
+                                <exclude>**/*Presenter*</exclude>
+                                <exclude>**/*Entity*</exclude>
+                                <exclude>**/*Test*</exclude>
+                                <exclude>**/*Inject*</exclude>
+                                <exclude>**/*Exception*</exclude>
+                                <exclude>**/*ActuatorConfig*</exclude>
+                                <exclude>**/*DatabaseHealthCheckService*</exclude>
+                                <exclude>**/*RestaurantNotFound*</exclude>
+                                <exclude>**/*CepController*</exclude>
+                                <exclude>**/*ViaCepService*</exclude>
+                                <exclude>**/*FoodarchApplication*</exclude>
+                                <exclude>**/Generated*.class</exclude>
+                                <exclude>**/infra/gateways/persistance/**</exclude>
+                                <exclude>**/infra/config/**</exclude>
+                                <exclude>**/domain/exceptions/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
