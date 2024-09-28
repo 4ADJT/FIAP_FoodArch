@@ -10,8 +10,6 @@ import br.com.fiap.foodarch.domain.entities.restaurants.kitchens.KitchensDefinit
 import br.com.fiap.foodarch.domain.entities.restaurants.kitchens.RestaurantKitchens;
 import br.com.fiap.foodarch.domain.exceptions.restaurants.KitchenAlreadyExistsException;
 import br.com.fiap.foodarch.domain.exceptions.users.UserUnauthorizedException;
-import br.com.fiap.foodarch.domain.records.restaurants.RestaurantOutput;
-import br.com.fiap.foodarch.domain.records.restaurants.kitchen.KitchenDefinitionOutput;
 import br.com.fiap.foodarch.domain.records.restaurants.kitchen.RestaurantKitchenOutput;
 import org.springframework.http.HttpStatus;
 

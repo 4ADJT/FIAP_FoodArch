@@ -1,10 +1,12 @@
 package br.com.fiap.foodarch.infra.config.injectable;
 
+import br.com.fiap.foodarch.application.controller.restaurants.kitchens.DeleteRestaurantKitchenController;
 import br.com.fiap.foodarch.application.controller.restaurants.kitchens.SaveKitchenInRestaurantController;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.RestaurantRepository;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.kitchen.KitchenDefinitionRepository;
 import br.com.fiap.foodarch.application.gateways.interfaces.restaurants.kitchen.RestaurantKitchenRepository;
 import br.com.fiap.foodarch.domain.entities.restaurants.kitchens.CreateRestaurantKitchenFactory;
+import br.com.fiap.foodarch.domain.usecases.restaurants.kitchen.DeleteRestaurantKitchen;
 import br.com.fiap.foodarch.domain.usecases.restaurants.kitchen.SaveRestaurantKitchen;
 import br.com.fiap.foodarch.infra.external.restaurants.kitchen.KitchenMapper;
 import org.springframework.context.annotation.Bean;
@@ -35,5 +37,16 @@ public class InjectKitchen {
   @Bean
   public SaveKitchenInRestaurantController saveKitchenInRestaurantController(SaveRestaurantKitchen saveRestaurantKitchen) {
     return new SaveKitchenInRestaurantController(saveRestaurantKitchen);
+  }
+
+  @Bean
+  public DeleteRestaurantKitchen deleteRestaurantKitchen(
+      RestaurantRepository restaurantRepository, RestaurantKitchenRepository repository) {
+    return new DeleteRestaurantKitchen(restaurantRepository, repository);
+  }
+
+  @Bean
+  public DeleteRestaurantKitchenController deleteRestaurantKitchenController(DeleteRestaurantKitchen deleteRestaurantKitchen) {
+    return new DeleteRestaurantKitchenController(deleteRestaurantKitchen);
   }
 }

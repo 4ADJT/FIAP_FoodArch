@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/restaurants/kitchen")
+@RequestMapping("/restaurants")
 @Tag(name = "Restaurants - Kitchens Definitions")
 public class SaveKitchenInRestaurantController {
   private final SaveRestaurantKitchen saveRestaurantKitchen;
@@ -19,7 +19,7 @@ public class SaveKitchenInRestaurantController {
     this.saveRestaurantKitchen = saveRestaurantKitchen;
   }
 
-  @PostMapping("/restaurant/{restaurantId}/{kitchenId}")
+  @PostMapping("/kitchen/{restaurantId}/{kitchenId}")
   @Operation(summary = "Save kitchen to restaurant", description = "Save kitchen to restaurant from FoodArch.")
   public ResponseEntity<RestaurantKitchenOutput> saveKitchenInRestaurantController(
       @PathVariable UUID restaurantId,
