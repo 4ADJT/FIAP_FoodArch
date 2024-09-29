@@ -1,6 +1,5 @@
 package br.com.fiap.foodarch.application.gateways.interfaces.restaurants.restaurantTables;
 
-import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.RestaurantOperatingHours;
 import br.com.fiap.foodarch.domain.entities.restaurants.tables.RestaurantTables;
 
 import java.util.UUID;
