@@ -1,6 +1,6 @@
 package br.com.fiap.foodarch.infra.external.restaurants.mv;
 
-import br.com.fiap.foodarch.infra.external.restaurants.mv.support.RestaurantDataMVId;
+import br.com.fiap.foodarch.infra.external.restaurants.mv.support.data.RestaurantDataMVId;
 import jakarta.persistence.*;
 
 import lombok.Data;
@@ -53,7 +53,7 @@ public class RestaurantDataMV {
   @Column(name = "address_zipcode")
   private String addressZipcode;
 
-  private Object kitchens;
+  private String kitchens;
 
   private Object operation;
 
