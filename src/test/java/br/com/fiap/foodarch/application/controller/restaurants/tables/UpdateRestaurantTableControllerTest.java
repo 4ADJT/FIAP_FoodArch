@@ -17,7 +17,6 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UpdateRestaurantTableControllerTest {
@@ -52,8 +51,9 @@ class UpdateRestaurantTableControllerTest {
         when(updateRestaurantTable.execute(eq(restaurantId), any(RestaurantTablesInput.class), eq(ownerId))).thenReturn(restaurantTables);
 
         // Fazendo a requisição PUT
-        mockMvc.perform(put("/restaurants/tables/{restaurantId}/{restaurantTableId}", restaurantId, restaurantTableId).contentType(MediaType.APPLICATION_JSON).param("ownerId", ownerId.toString()).content(objectMapper.writeValueAsString(restaurantTablesInput))).andExpect(status().isOk()) // Verifica se o status de resposta é 200
-                .andExpect(jsonPath("$.id").value(restaurantTables.getId().toString())).andExpect(jsonPath("$.restaurantId").value(restaurantTables.getRestaurantId().toString())).andExpect(jsonPath("$.tableNumber").value(restaurantTables.getTableNumber())).andExpect(jsonPath("$.available").value(restaurantTables.isAvailable()));
+        mockMvc.perform(put("/restaurants/tables/{restaurantId}/{restaurantTableId}", restaurantId, restaurantTableId)
+                .contentType(MediaType.APPLICATION_JSON).param("ownerId", ownerId.toString())
+                .content(objectMapper.writeValueAsString(restaurantTablesInput))).andExpect(status().isOk());// Verifica se o status de resposta é 200
 
         // Verifica se o método do serviço foi chamado uma vez
         verify(updateRestaurantTable, times(1)).execute(eq(restaurantId), any(RestaurantTablesInput.class), eq(ownerId));

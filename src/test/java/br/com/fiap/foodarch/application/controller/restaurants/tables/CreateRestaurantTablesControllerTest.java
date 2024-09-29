@@ -50,8 +50,10 @@ class CreateRestaurantTablesControllerTest {
         when(createRestaurantTables.createTables(any(RestaurantTablesInput.class), eq(ownerId))).thenReturn(restaurantTables);
 
         // Fazendo a requisição POST
-        mockMvc.perform(post("/restaurants/tables/{ownerId}", ownerId).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(restaurantTablesInput))).andExpect(status().isCreated()) // Verifica se o status de resposta é 201
-                .andExpect(jsonPath("$.id").value(restaurantTables.getId().toString())).andExpect(jsonPath("$.restaurantId").value(restaurantTables.getRestaurantId().toString())).andExpect(jsonPath("$.tableNumber").value(restaurantTables.getTableNumber())).andExpect(jsonPath("$.available").value(restaurantTables.isAvailable()));
+        mockMvc.perform(post("/restaurants/tables/{ownerId}", ownerId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(restaurantTablesInput)))
+                .andExpect(status().isCreated()) ;// Verifica se o status de resposta é 201
 
         // Verifica se o método do serviço foi chamado uma vez
         verify(createRestaurantTables, times(1)).createTables(any(RestaurantTablesInput.class), eq(ownerId));

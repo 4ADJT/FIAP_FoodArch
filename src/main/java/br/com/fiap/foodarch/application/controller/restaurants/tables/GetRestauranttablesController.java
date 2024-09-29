@@ -26,7 +26,7 @@ public class GetRestauranttablesController {
         this.getRestaurantTablesById = getRestaurantTablesById;
     }
 
-    @GetMapping("/{tableId}")
+    @GetMapping("/{tableNumber}")
     @Operation(summary = "Get restaurant table by id", description = "Get restaurant table by id from FoodArch.")
     public ResponseEntity<RestaurantTablesOutput> getRestaurantTableById(@ParameterObject @PathVariable int tableNumber) {
         RestaurantTables tables = getRestaurantTablesById.execute(tableNumber);

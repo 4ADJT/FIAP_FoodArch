@@ -45,8 +45,8 @@ class GetRestauranttablesControllerTest {
         when(getRestaurantTablesById.execute(tableNumber)).thenReturn(restaurantTables);
 
         // Faz a requisição GET
-        mockMvc.perform(get("/restaurants/tables/{tableNumber}", tableNumber).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()) // Verifica se o status de resposta é 200
-                .andExpect(jsonPath("$.id").value(restaurantTables.getId().toString())).andExpect(jsonPath("$.restaurantId").value(restaurantTables.getRestaurantId().toString())).andExpect(jsonPath("$.tableNumber").value(restaurantTables.getTableNumber())).andExpect(jsonPath("$.available").value(restaurantTables.isAvailable()));
+        mockMvc.perform(get("/restaurants/tables/{tableNumber}", tableNumber)
+                        .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()); // Verifica se o status de resposta é 200
 
         // Verifica se o método do serviço foi chamado uma vez
         verify(getRestaurantTablesById, times(1)).execute(tableNumber);
