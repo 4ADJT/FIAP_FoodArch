@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/restaurants/tables")
-@Tag(name = "tables")
+@Tag(name = "Tables")
 public class GetRestauranttablesController {
 
     private final GetRestaurantTablesById getRestaurantTablesById;
