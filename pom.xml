@@ -185,7 +185,8 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
+                        <id>report-verify</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
@@ -216,10 +217,10 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>report-aggregate</id>
-                        <phase>verify</phase>
+                        <id>report-package</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>report-aggregate</goal>
+                            <goal>report</goal>
                         </goals>
                         <configuration>
                             <excludes>
