@@ -1,4 +1,4 @@
-package br.com.fiap.foodarch.infra.external.restaurants.mv.support;
+package br.com.fiap.foodarch.infra.external.restaurants.mv.support.data;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

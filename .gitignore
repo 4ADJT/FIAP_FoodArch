@@ -33,3 +33,5 @@ build/
 
 k8s-manifests/*
 k8s-manifests/
+/k6/node_modules/
+/k6/dist/
