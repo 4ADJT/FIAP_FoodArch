@@ -6,9 +6,9 @@ import java.util.UUID;
 
 public interface RestaurantAppointmentRepository {
 
-  RestaurantAppointment createAppointmentRestaurant(RestaurantAppointment restaurantAppointment, UUID restaurantId, UUID tableId);
+  RestaurantAppointment createAppointmentRestaurant(RestaurantAppointment restaurantAppointment);
 
-  RestaurantAppointment updateAppointmentRestaurant(RestaurantAppointment restaurantAppointment, UUID restaurantId, UUID tableId);
+  RestaurantAppointment updateAppointmentRestaurant(RestaurantAppointment restaurantAppointment);
 
   RestaurantAppointment findByAppointmentId(UUID appointmentId);
 

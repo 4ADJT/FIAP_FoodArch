@@ -1,6 +1,7 @@
 package br.com.fiap.foodarch.infra.external.restaurants.appointment;
 
 import br.com.fiap.foodarch.infra.external.restaurants.RestaurantEntity;
+import br.com.fiap.foodarch.infra.external.restaurants.tables.RestaurantTablesEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,10 +27,9 @@ public class RestaurantAppointmentEntity {
   @JoinColumn(name = "restaurant_id", referencedColumnName = "id", nullable = false)
   private RestaurantEntity restaurant;
 
-//  TODO: add o table
-//  @OneToOne(fetch = FetchType.LAZY, optional = false)
-//  @JoinColumn(name = "table_id", referencedColumnName = "id", nullable = false)
-//  private TableEntity table;
+  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "table_id", referencedColumnName = "id", nullable = false)
+  private RestaurantTablesEntity table;
 
   private LocalDateTime reservation_date;
 
@@ -49,13 +49,13 @@ public class RestaurantAppointmentEntity {
           LocalDateTime reservation_date,
           LocalTime start_time,
           LocalTime end_time,
-          RestaurantEntity restaurant
-//        TODO: add a entidade da mesa | TableEntity table
+          RestaurantEntity restaurant,
+          RestaurantTablesEntity table
   ) {
     this.reservation_date = reservation_date;
     this.start_time = start_time;
     this.end_time = end_time;
     this.restaurant = restaurant;
-//  TODO: add a entidade da mesa |  this.table = table;
+    this.table = table;
   }
 }

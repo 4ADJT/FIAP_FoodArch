@@ -1,26 +1,29 @@
 package br.com.fiap.foodarch.infra.external.restaurants.appointment;
 
+import br.com.fiap.foodarch.domain.entities.restaurants.Restaurant;
 import br.com.fiap.foodarch.domain.entities.restaurants.appointment.RestaurantAppointment;
+import br.com.fiap.foodarch.domain.entities.restaurants.tables.RestaurantTables;
 import br.com.fiap.foodarch.infra.external.restaurants.RestaurantEntity;
+import br.com.fiap.foodarch.infra.external.restaurants.tables.RestaurantTablesEntity;
 
 public class RestaurantAppointmentMapper {
 
-  public RestaurantAppointmentEntity toEntity(RestaurantAppointmentEntity appointment, RestaurantEntity restaurant) {
+  public RestaurantAppointmentEntity toEntity(RestaurantAppointment appointment, RestaurantEntity restaurant, RestaurantTablesEntity tables) {
     return new RestaurantAppointmentEntity(
-      appointment.getReservation_date(),
-      appointment.getStart_time(),
-      appointment.getEnd_time(),
-      restaurant
-//    TODO: add a entidade da mesa "table"
+      appointment.getReservationDate(),
+      appointment.getStartTime(),
+      appointment.getEndTime(),
+      restaurant,
+      tables
     );
   }
 
-  public RestaurantAppointment toDomain(RestaurantAppointmentEntity appointmentEntity,RestaurantEntity restaurantEntity)// TODO: add a table entity
+  public RestaurantAppointment toDomain(RestaurantAppointmentEntity appointmentEntity)
    {
     return new RestaurantAppointment(
             appointmentEntity.getId(),
-            restaurantEntity.getId(),
-            restaurantEntity.getId(), // TODO: aqui deve ser o id da 'table'
+            appointmentEntity.getRestaurant().getId(),
+            appointmentEntity.getTable().getId(),
             appointmentEntity.getReservation_date(),
             appointmentEntity.getStart_time(),
             appointmentEntity.getEnd_time(),
