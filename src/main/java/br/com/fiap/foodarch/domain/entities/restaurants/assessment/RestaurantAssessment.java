@@ -30,7 +30,7 @@ public class RestaurantAssessment {
   private LocalDateTime updatedAt;
 
   @Builder(builderClassName = "CreateAssessmentBuilder", builderMethodName = "createAssessment")
-  public RestaurantAssessment(final UUID userId, final UUID restaurantId, final String comment, final boolean like, final int stars) {
+  public RestaurantAssessment(UUID userId, UUID restaurantId, String comment, boolean like, int stars) {
     this.userId = userId;
     this.restaurantId = restaurantId;
     this.comment = comment;

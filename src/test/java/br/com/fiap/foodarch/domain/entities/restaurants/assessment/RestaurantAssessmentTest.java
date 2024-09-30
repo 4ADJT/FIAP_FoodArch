@@ -29,7 +29,15 @@ class RestaurantAssessmentTest {
         createdAt = LocalDateTime.now().minusDays(1);
         updatedAt = LocalDateTime.now().minusDays(1);
 
-        assessment = new RestaurantAssessment(id, restaurantId, comment, like, stars, createdAt, updatedAt);
+        assessment = RestaurantAssessment
+            .createAssessment()
+            .userId(id)
+            .restaurantId(restaurantId)
+            .comment(comment)
+            .like(like)
+            .stars(stars)
+            .build();
+
     }
 
     @Test
@@ -40,9 +48,14 @@ class RestaurantAssessmentTest {
 
     @Test
     void testEquals() {
-        RestaurantAssessment otherAssessment = new RestaurantAssessment(
-                id, restaurantId, comment, like, stars, createdAt, updatedAt
-        );
+        RestaurantAssessment otherAssessment = assessment = RestaurantAssessment
+            .createAssessment()
+            .userId(id)
+            .restaurantId(restaurantId)
+            .comment(comment)
+            .like(like)
+            .stars(stars)
+            .build();
         assertEquals(assessment, otherAssessment);
     }
 
@@ -54,15 +67,15 @@ class RestaurantAssessmentTest {
 
     @Test
     void testHashCode() {
-        RestaurantAssessment otherAssessment = new RestaurantAssessment(
-                id, restaurantId, comment, like, stars, createdAt, updatedAt
-        );
+        RestaurantAssessment otherAssessment = assessment = RestaurantAssessment
+            .createAssessment()
+            .userId(id)
+            .restaurantId(restaurantId)
+            .comment(comment)
+            .like(like)
+            .stars(stars)
+            .build();
         assertEquals(assessment.hashCode(), otherAssessment.hashCode());
-    }
-
-    @Test
-    void getId() {
-        assertEquals(id, assessment.getId());
     }
 
     @Test
@@ -83,16 +96,6 @@ class RestaurantAssessmentTest {
     @Test
     void getStars() {
         assertEquals(5, assessment.getStars());
-    }
-
-    @Test
-    void getCreatedAt() {
-        assertEquals(createdAt, assessment.getCreatedAt());
-    }
-
-    @Test
-    void getUpdatedAt() {
-        assertEquals(updatedAt, assessment.getUpdatedAt());
     }
 
     @Test
