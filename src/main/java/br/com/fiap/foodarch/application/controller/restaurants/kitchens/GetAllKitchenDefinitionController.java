@@ -17,19 +17,19 @@ import java.util.List;
 @RequestMapping("/restaurants/kitchens")
 @Tag(name = "Restaurants - Kitchens Definitions")
 public class GetAllKitchenDefinitionController {
-  private final GetAllKitchenDefinitions getAllKitchenDefinitions;
+    private final GetAllKitchenDefinitions getAllKitchenDefinitions;
 
-  public GetAllKitchenDefinitionController(GetAllKitchenDefinitions getAllKitchenDefinitions) {
-    this.getAllKitchenDefinitions = getAllKitchenDefinitions;
-  }
+    public GetAllKitchenDefinitionController(GetAllKitchenDefinitions getAllKitchenDefinitions) {
+        this.getAllKitchenDefinitions = getAllKitchenDefinitions;
+    }
 
-  @GetMapping
-  @Operation(summary = "Get all kitchens definitions")
-  public ResponseEntity<List<KitchenDefinitionOutput>> getAllKitchenDefinitions() {
+    @GetMapping
+    @Operation(summary = "Get all kitchens definitions")
+    public ResponseEntity<List<KitchenDefinitionOutput>> getAllKitchenDefinitions() {
 
-    List<KitchensDefinition> list = getAllKitchenDefinitions.execute();
+        List<KitchensDefinition> list = getAllKitchenDefinitions.execute();
 
-    return ResponseEntity.ok(RestaurantKitchenDefinitionPresenter.restaurantKitchenDefinitionResponse(list));
+        return ResponseEntity.ok(RestaurantKitchenDefinitionPresenter.restaurantKitchenDefinitionResponse(list));
 
-  }
+    }
 }

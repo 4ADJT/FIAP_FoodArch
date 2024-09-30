@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class DefaultController {
 
-  private record BodyResponse(String status) {}
-  private final BodyResponse bodyResponse;
+    private record BodyResponse(String status) {
+    }
 
-  public DefaultController() {
-    this.bodyResponse = new BodyResponse("ok");
-  }
+    private final BodyResponse bodyResponse;
 
-  @GetMapping
-  @Operation(hidden = true)
-  public ResponseEntity<BodyResponse> health() {
-    return ResponseEntity.status(HttpStatus.OK).body(bodyResponse);
-  }
+    public DefaultController() {
+        this.bodyResponse = new BodyResponse("ok");
+    }
+
+    @GetMapping
+    @Operation(hidden = true)
+    public ResponseEntity<BodyResponse> health() {
+        return ResponseEntity.status(HttpStatus.OK).body(bodyResponse);
+    }
 
 }

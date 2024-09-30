@@ -6,14 +6,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public class GetAllRestaurants {
-  private final RestaurantRepository repository;
+    private final RestaurantRepository repository;
 
-  public GetAllRestaurants(RestaurantRepository repository) {
-    this.repository = repository;
-  }
+    public GetAllRestaurants(RestaurantRepository repository) {
+        this.repository = repository;
+    }
 
-  public Page<Restaurant> execute(Pageable pageable) {
-    return repository.listRestaurants(pageable);
-  }
+    public Page<Restaurant> execute(Pageable pageable) {
+        return repository.listRestaurants(pageable);
+    }
 
 }

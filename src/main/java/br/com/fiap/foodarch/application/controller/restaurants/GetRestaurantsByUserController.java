@@ -22,24 +22,20 @@ import java.util.UUID;
 @RequestMapping("/restaurants")
 @Tag(name = "Restaurants")
 public class GetRestaurantsByUserController {
-  private final GetRestaurantsByUser getRestaurantsByUser;
+    private final GetRestaurantsByUser getRestaurantsByUser;
 
-  public GetRestaurantsByUserController(GetRestaurantsByUser getRestaurantsByUser) {
-    this.getRestaurantsByUser = getRestaurantsByUser;
-  }
+    public GetRestaurantsByUserController(GetRestaurantsByUser getRestaurantsByUser) {
+        this.getRestaurantsByUser = getRestaurantsByUser;
+    }
 
-  @GetMapping("/{ownerId}")
-  @Operation(summary = "Get all restaurants by user", description = "Get all restaurants from FoodArch by user.")
-  public ResponseEntity<Page<RestaurantOutput>> getRestaurantsByUser(
-      @ParameterObject
-      @PathVariable UUID ownerId,
-      @PageableDefault(size = 10, page = 0) Pageable pageable
-  ) {
+    @GetMapping("/{ownerId}")
+    @Operation(summary = "Get all restaurants by user", description = "Get all restaurants from FoodArch by user.")
+    public ResponseEntity<Page<RestaurantOutput>> getRestaurantsByUser(@ParameterObject @PathVariable UUID ownerId, @PageableDefault(size = 10, page = 0) Pageable pageable) {
 
-    Page<Restaurant> list = getRestaurantsByUser.execute(ownerId, pageable);
+        Page<Restaurant> list = getRestaurantsByUser.execute(ownerId, pageable);
 
-    Page<RestaurantOutput> output = list.map(RestaurantPresenter::restaurantResponse);
+        Page<RestaurantOutput> output = list.map(RestaurantPresenter::restaurantResponse);
 
-    return ResponseEntity.ok(output);
-  }
+        return ResponseEntity.ok(output);
+    }
 }

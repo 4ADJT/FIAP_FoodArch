@@ -16,22 +16,20 @@ import java.util.UUID;
 @RequestMapping("/restaurants/address")
 @Tag(name = "Restaurant - Address")
 public class CreateRestaurantAddressController {
-  private final CreateRestaurantAddress createRestaurantAddress;
+    private final CreateRestaurantAddress createRestaurantAddress;
 
-  public CreateRestaurantAddressController(CreateRestaurantAddress createRestaurantAddress) {
-    this.createRestaurantAddress = createRestaurantAddress;
-  }
+    public CreateRestaurantAddressController(CreateRestaurantAddress createRestaurantAddress) {
+        this.createRestaurantAddress = createRestaurantAddress;
+    }
 
-  @PostMapping("/{restaurantId}")
-  @Operation(summary = "Create restaurant address", description = "Create new restaurant address to FoodArch.")
-  public ResponseEntity<RestaurantAddressOutput> createRestaurantAddress(@PathVariable UUID restaurantId,
-                                                                         @RequestParam("ownerId") UUID ownerId,
-                                                                         @RequestBody RestaurantAddressInput restaurantAddressInput) {
-    RestaurantAddresses restaurantAddresses = createRestaurantAddress.execute(restaurantId, ownerId, restaurantAddressInput);
+    @PostMapping("/{restaurantId}")
+    @Operation(summary = "Create restaurant address", description = "Create new restaurant address to FoodArch.")
+    public ResponseEntity<RestaurantAddressOutput> createRestaurantAddress(@PathVariable UUID restaurantId,
+                                                                           @RequestParam("ownerId") UUID ownerId,
+                                                                           @RequestBody RestaurantAddressInput restaurantAddressInput) {
+        RestaurantAddresses restaurantAddresses = createRestaurantAddress.execute(restaurantId, ownerId, restaurantAddressInput);
 
-    return ResponseEntity.status(201).body(RestaurantAddressPresenter.restaurantAddressResponse(restaurantAddresses));
-  }
-
-
+        return ResponseEntity.status(201).body(RestaurantAddressPresenter.restaurantAddressResponse(restaurantAddresses));
+    }
 
 }

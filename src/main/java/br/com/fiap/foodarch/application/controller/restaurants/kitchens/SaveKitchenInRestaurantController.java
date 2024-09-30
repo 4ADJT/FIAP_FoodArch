@@ -13,23 +13,22 @@ import java.util.UUID;
 @RequestMapping("/restaurants")
 @Tag(name = "Restaurants - Kitchens Definitions")
 public class SaveKitchenInRestaurantController {
-  private final SaveRestaurantKitchen saveRestaurantKitchen;
+    private final SaveRestaurantKitchen saveRestaurantKitchen;
 
-  public SaveKitchenInRestaurantController(SaveRestaurantKitchen saveRestaurantKitchen) {
-    this.saveRestaurantKitchen = saveRestaurantKitchen;
-  }
+    public SaveKitchenInRestaurantController(SaveRestaurantKitchen saveRestaurantKitchen) {
+        this.saveRestaurantKitchen = saveRestaurantKitchen;
+    }
 
-  @PostMapping("/kitchen/{restaurantId}/{kitchenId}")
-  @Operation(summary = "Save kitchen to restaurant", description = "Save kitchen to restaurant from FoodArch.")
-  public ResponseEntity<RestaurantKitchenOutput> saveKitchenInRestaurantController(
-      @PathVariable UUID restaurantId,
-      @PathVariable UUID kitchenId,
-      @RequestParam("ownerId") UUID ownerId
-  )
-    {
-      RestaurantKitchenOutput restaurantKitchenOutput = this.saveRestaurantKitchen.execute(restaurantId, kitchenId, ownerId);
+    @PostMapping("/kitchen/{restaurantId}/{kitchenId}")
+    @Operation(summary = "Save kitchen to restaurant", description = "Save kitchen to restaurant from FoodArch.")
+    public ResponseEntity<RestaurantKitchenOutput> saveKitchenInRestaurantController(
+            @PathVariable UUID restaurantId,
+            @PathVariable UUID kitchenId,
+            @RequestParam("ownerId") UUID ownerId
+    ) {
+        RestaurantKitchenOutput restaurantKitchenOutput = this.saveRestaurantKitchen.execute(restaurantId, kitchenId, ownerId);
 
-      return ResponseEntity.status(201).body(restaurantKitchenOutput);
+        return ResponseEntity.status(201).body(restaurantKitchenOutput);
 
     }
-  }
+}

@@ -8,13 +8,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.UUID;
 
 public class GetRestaurantsByUser {
-  private final RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
-  public GetRestaurantsByUser(RestaurantRepository restaurantRepository) {
-    this.restaurantRepository = restaurantRepository;
-  }
+    public GetRestaurantsByUser(RestaurantRepository restaurantRepository) {
+        this.restaurantRepository = restaurantRepository;
+    }
 
-  public Page<Restaurant> execute(UUID ownerId, Pageable pageable) {
-    return restaurantRepository.findByOwnerId(ownerId, pageable);
-  }
+    public Page<Restaurant> execute(UUID ownerId, Pageable pageable) {
+        return restaurantRepository.findByOwnerId(ownerId, pageable);
+    }
 }

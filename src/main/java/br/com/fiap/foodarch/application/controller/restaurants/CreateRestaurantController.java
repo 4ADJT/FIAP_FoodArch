@@ -16,25 +16,20 @@ import java.util.UUID;
 @RequestMapping("/restaurants")
 @Tag(name = "Restaurants")
 public class CreateRestaurantController {
-  private final CreateRestaurant createRestaurant;
+    private final CreateRestaurant createRestaurant;
 
-  public CreateRestaurantController(
-      CreateRestaurant createRestaurant
-  ) {
-    this.createRestaurant = createRestaurant;
-  }
+    public CreateRestaurantController(CreateRestaurant createRestaurant) {
+        this.createRestaurant = createRestaurant;
+    }
 
-  @PostMapping("/{ownerId}")
-  @Operation(summary = "Create restaurant", description = "Create new restaurant to FoodArch.")
-  public ResponseEntity<RestaurantOutput> createRestaurant(
+    @PostMapping("/{ownerId}")
+    @Operation(summary = "Create restaurant", description = "Create new restaurant to FoodArch.")
+    public ResponseEntity<RestaurantOutput> createRestaurant(
 
-        @RequestBody RestaurantInput restaurantInput,
-        @PathVariable UUID ownerId
-      ) {
-    Restaurant restaurant = createRestaurant.execute(restaurantInput, ownerId);
+            @RequestBody RestaurantInput restaurantInput, @PathVariable UUID ownerId) {
+        Restaurant restaurant = createRestaurant.execute(restaurantInput, ownerId);
 
-
-    return ResponseEntity.status(201).body(RestaurantPresenter.restaurantResponse(restaurant));
-  }
+        return ResponseEntity.status(201).body(RestaurantPresenter.restaurantResponse(restaurant));
+    }
 
 }

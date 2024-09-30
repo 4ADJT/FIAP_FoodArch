@@ -18,24 +18,19 @@ import java.util.UUID;
 @RequestMapping("/users")
 @Tag(name = "Users")
 public class GetUserByIdController {
-  private final GetUserById getUserById;
+    private final GetUserById getUserById;
 
-  public GetUserByIdController(
-      GetUserById getUserById
-  ) {
-    this.getUserById = getUserById;
-  }
+    public GetUserByIdController(GetUserById getUserById) {
+        this.getUserById = getUserById;
+    }
 
-  @GetMapping("/{id}")
-  @Operation(summary = "Get user by id.", description = "Get users by id from FoodArch.")
-  public ResponseEntity<UserOutput> getUserById(
-      @ParameterObject
-      @PathVariable UUID id
-  ) {
+    @GetMapping("/{id}")
+    @Operation(summary = "Get user by id.", description = "Get users by id from FoodArch.")
+    public ResponseEntity<UserOutput> getUserById(@ParameterObject @PathVariable UUID id) {
 
-    UserOutput user = UserPresenter.userResponse(getUserById.execute(id));
+        UserOutput user = UserPresenter.userResponse(getUserById.execute(id));
 
-    return ResponseEntity.ok(user);
-  }
+        return ResponseEntity.ok(user);
+    }
 
 }

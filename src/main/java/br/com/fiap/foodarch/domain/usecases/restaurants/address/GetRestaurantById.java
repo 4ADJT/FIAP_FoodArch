@@ -8,21 +8,21 @@ import org.springframework.http.HttpStatus;
 import java.util.UUID;
 
 public class GetRestaurantById {
-  private final RestaurantAddressRepository repository;
+    private final RestaurantAddressRepository repository;
 
-  public GetRestaurantById(RestaurantAddressRepository repository) {
-    this.repository = repository;
-  }
-
-  public RestaurantAddresses execute(UUID restaurantId) {
-    if(restaurantId == null) {
-      throw new IllegalArgumentException("Restaurant id is required");
+    public GetRestaurantById(RestaurantAddressRepository repository) {
+        this.repository = repository;
     }
 
-    if(repository.findByRestaurantId(restaurantId) == null) {
-      throw new RestaurantAddressNotFoundException("Restaurant address not found", HttpStatus.NOT_FOUND);
-    }
+    public RestaurantAddresses execute(UUID restaurantId) {
+        if (restaurantId == null) {
+            throw new IllegalArgumentException("Restaurant id is required");
+        }
 
-    return repository.findByRestaurantId(restaurantId);
-  }
+        if (repository.findByRestaurantId(restaurantId) == null) {
+            throw new RestaurantAddressNotFoundException("Restaurant address not found", HttpStatus.NOT_FOUND);
+        }
+
+        return repository.findByRestaurantId(restaurantId);
+    }
 }

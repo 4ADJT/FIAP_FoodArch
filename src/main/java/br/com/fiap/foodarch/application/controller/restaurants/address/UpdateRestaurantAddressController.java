@@ -16,22 +16,22 @@ import java.util.UUID;
 @RequestMapping("/restaurants/address")
 @Tag(name = "Restaurant - Address")
 public class UpdateRestaurantAddressController {
-  private final UpdateRestaurantAddress updateRestaurantAddress;
+    private final UpdateRestaurantAddress updateRestaurantAddress;
 
-  public UpdateRestaurantAddressController(UpdateRestaurantAddress updateRestaurantAddress) {
-    this.updateRestaurantAddress = updateRestaurantAddress;
-  }
+    public UpdateRestaurantAddressController(UpdateRestaurantAddress updateRestaurantAddress) {
+        this.updateRestaurantAddress = updateRestaurantAddress;
+    }
 
-  @PutMapping("/{restaurantId}")
-  @Operation(summary = "Update restaurant address", description = "Update restaurant address")
-  public ResponseEntity<RestaurantAddressOutput> updateRestaurantAddress(
-      @PathVariable UUID restaurantId,
-      @RequestParam("ownerId") UUID ownerId,
-      @RequestBody RestaurantAddressInput restaurantAddressInput
-  ) {
-    RestaurantAddresses restaurantAddress = updateRestaurantAddress.execute(restaurantId, ownerId, restaurantAddressInput);
+    @PutMapping("/{restaurantId}")
+    @Operation(summary = "Update restaurant address", description = "Update restaurant address")
+    public ResponseEntity<RestaurantAddressOutput> updateRestaurantAddress(
+            @PathVariable UUID restaurantId,
+            @RequestParam("ownerId") UUID ownerId,
+            @RequestBody RestaurantAddressInput restaurantAddressInput
+    ) {
+        RestaurantAddresses restaurantAddress = updateRestaurantAddress.execute(restaurantId, ownerId, restaurantAddressInput);
 
-    return ResponseEntity.status(201).body(RestaurantAddressPresenter.restaurantAddressResponse(restaurantAddress));
-  }
+        return ResponseEntity.status(201).body(RestaurantAddressPresenter.restaurantAddressResponse(restaurantAddress));
+    }
 
 }

@@ -6,13 +6,13 @@ import br.com.fiap.foodarch.domain.entities.restaurants.kitchens.KitchensDefinit
 import java.util.List;
 
 public class GetAllKitchenDefinitions {
-  private final KitchenDefinitionRepository repository;
+    private final KitchenDefinitionRepository repository;
 
-  public GetAllKitchenDefinitions(KitchenDefinitionRepository repository) {
-    this.repository = repository;
-  }
+    public GetAllKitchenDefinitions(KitchenDefinitionRepository repository) {
+        this.repository = repository;
+    }
 
-  public List<KitchensDefinition> execute() {
-    return repository.getAll();
-  }
+    public List<KitchensDefinition> execute() {
+        return repository.getAll();
+    }
 }

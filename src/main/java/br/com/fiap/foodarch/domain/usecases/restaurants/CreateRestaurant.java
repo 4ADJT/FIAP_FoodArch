@@ -12,34 +12,34 @@ import org.springframework.http.HttpStatus;
 import java.util.UUID;
 
 public class CreateRestaurant {
-  private final RestaurantRepository repository;
-  private final UserRepository userRepository;
-  private final CreateRestaurantFactory factory;
+    private final RestaurantRepository repository;
+    private final UserRepository userRepository;
+    private final CreateRestaurantFactory factory;
 
-  public CreateRestaurant(
-    RestaurantRepository repository,
-    UserRepository userRepository,
-    CreateRestaurantFactory factory
-  ) {
-    this.repository = repository;
-    this.factory = factory;
-    this.userRepository = userRepository;
-  }
-
-  public Restaurant execute(RestaurantInput restaurantInput, UUID ownerId) {
-
-    User userTo = this.userRepository.findById(ownerId);
-
-    if(!restaurantInput.ownerId().equals(ownerId)) {
-      throw new UserUnauthorizedException("User not authorized", HttpStatus.UNAUTHORIZED);
+    public CreateRestaurant(
+            RestaurantRepository repository,
+            UserRepository userRepository,
+            CreateRestaurantFactory factory
+    ) {
+        this.repository = repository;
+        this.factory = factory;
+        this.userRepository = userRepository;
     }
 
-    Restaurant restaurant = factory.createRestaurant(
-        restaurantInput.name(),
-        userTo.getId()
-    );
+    public Restaurant execute(RestaurantInput restaurantInput, UUID ownerId) {
 
-    return repository.createRestaurant(restaurant, ownerId);
-  }
+        User userTo = this.userRepository.findById(ownerId);
+
+        if (!restaurantInput.ownerId().equals(ownerId)) {
+            throw new UserUnauthorizedException("User not authorized", HttpStatus.UNAUTHORIZED);
+        }
+
+        Restaurant restaurant = factory.createRestaurant(
+                restaurantInput.name(),
+                userTo.getId()
+        );
+
+        return repository.createRestaurant(restaurant, ownerId);
+    }
 
 }

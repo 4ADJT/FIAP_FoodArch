@@ -15,29 +15,21 @@ import java.util.UUID;
 @RequestMapping("/restaurants")
 @Tag(name = "Restaurants")
 public class UpdateRestaurantNameController {
-  private final UpdateRestaurantName updateRestaurantName;
+    private final UpdateRestaurantName updateRestaurantName;
 
-  public UpdateRestaurantNameController(UpdateRestaurantName updateRestaurantName) {
-    this.updateRestaurantName = updateRestaurantName;
-  }
+    public UpdateRestaurantNameController(UpdateRestaurantName updateRestaurantName) {
+        this.updateRestaurantName = updateRestaurantName;
+    }
 
-  @PutMapping("/{ownerId}")
-  @Operation(summary = "Update restaurant name", description = "Update restaurant name from FoodArch.")
-  public ResponseEntity<RestaurantOutput> updateRestaurantName(
-      @RequestParam("restaurantId") UUID restaurantId,
-      @RequestBody RestaurantInput restaurantInput,
-      @PathVariable UUID ownerId) {
+    @PutMapping("/{ownerId}")
+    @Operation(summary = "Update restaurant name", description = "Update restaurant name from FoodArch.")
+    public ResponseEntity<RestaurantOutput> updateRestaurantName(@RequestParam("restaurantId") UUID restaurantId, @RequestBody RestaurantInput restaurantInput, @PathVariable UUID ownerId) {
 
-    Restaurant updated = updateRestaurantName.execute(restaurantInput, ownerId, restaurantId);
+        Restaurant updated = updateRestaurantName.execute(restaurantInput, ownerId, restaurantId);
 
-    RestaurantOutput output = new RestaurantOutput(
-        updated.getId(),
-        updated.getName(),
-        updated.getOwnerId(),
-        updated.getCreatedAt()
-    );
+        RestaurantOutput output = new RestaurantOutput(updated.getId(), updated.getName(), updated.getOwnerId(), updated.getCreatedAt());
 
-    return ResponseEntity.status(201).body(output);
-  }
+        return ResponseEntity.status(201).body(output);
+    }
 
 }

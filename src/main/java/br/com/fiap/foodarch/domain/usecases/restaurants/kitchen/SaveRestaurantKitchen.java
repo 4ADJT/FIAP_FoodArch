@@ -18,50 +18,50 @@ import java.util.UUID;
 
 public class SaveRestaurantKitchen {
 
-  private final RestaurantKitchenRepository repository;
-  private final CreateRestaurantKitchenFactory factory;
-  private final RestaurantRepository restaurantRepository;
-  private final KitchenDefinitionRepository kitchenRepository;
+    private final RestaurantKitchenRepository repository;
+    private final CreateRestaurantKitchenFactory factory;
+    private final RestaurantRepository restaurantRepository;
+    private final KitchenDefinitionRepository kitchenRepository;
 
-  public SaveRestaurantKitchen(
-      RestaurantKitchenRepository repository,
-      RestaurantRepository restaurantRepository,
-      CreateRestaurantKitchenFactory factory,
-      KitchenDefinitionRepository kitchenRepository) {
-    this.repository = repository;
-    this.factory = factory;
-    this.restaurantRepository = restaurantRepository;
-    this.kitchenRepository = kitchenRepository;
-  }
-
-  public RestaurantKitchenOutput execute(UUID restaurantId,
-                                         UUID kitchenId,
-                                         UUID ownerId) {
-
-    Optional<RestaurantKitchens> restaurantKitchen = this.repository.getByRestaurantIdAndKitchenId(
-        restaurantId, kitchenId);
-
-    Restaurant restaurant = this.restaurantRepository.findById(restaurantId);
-
-    if(!restaurant.getOwnerId().equals(ownerId)) {
-      throw new UserUnauthorizedException("Unauthorized action to user", HttpStatus.UNAUTHORIZED);
+    public SaveRestaurantKitchen(
+            RestaurantKitchenRepository repository,
+            RestaurantRepository restaurantRepository,
+            CreateRestaurantKitchenFactory factory,
+            KitchenDefinitionRepository kitchenRepository) {
+        this.repository = repository;
+        this.factory = factory;
+        this.restaurantRepository = restaurantRepository;
+        this.kitchenRepository = kitchenRepository;
     }
 
-    if(restaurantKitchen.isPresent()) {
-      throw new KitchenAlreadyExistsException("Kitchen already exists in restaurantId: " +
-          restaurantKitchen.get().getRestaurantId(), HttpStatus.BAD_REQUEST);
+    public RestaurantKitchenOutput execute(UUID restaurantId,
+                                           UUID kitchenId,
+                                           UUID ownerId) {
+
+        Optional<RestaurantKitchens> restaurantKitchen = this.repository.getByRestaurantIdAndKitchenId(
+                restaurantId, kitchenId);
+
+        Restaurant restaurant = this.restaurantRepository.findById(restaurantId);
+
+        if (!restaurant.getOwnerId().equals(ownerId)) {
+            throw new UserUnauthorizedException("Unauthorized action to user", HttpStatus.UNAUTHORIZED);
+        }
+
+        if (restaurantKitchen.isPresent()) {
+            throw new KitchenAlreadyExistsException("Kitchen already exists in restaurantId: " +
+                    restaurantKitchen.get().getRestaurantId(), HttpStatus.BAD_REQUEST);
+        }
+
+        RestaurantKitchens savedEntity = this.repository.save(factory.createRestaurantKitchens(
+                restaurantId, kitchenId
+        ));
+
+        KitchensDefinition kitchen = this.kitchenRepository.getById(kitchenId);
+
+        return RestaurantKitchenPresenter.restaurantKitchenResponse(
+                savedEntity, restaurant, kitchen
+        );
+
     }
-
-    RestaurantKitchens savedEntity = this.repository.save(factory.createRestaurantKitchens(
-        restaurantId, kitchenId
-    ));
-
-    KitchensDefinition kitchen = this.kitchenRepository.getById(kitchenId);
-
-    return RestaurantKitchenPresenter.restaurantKitchenResponse(
-        savedEntity, restaurant, kitchen
-    );
-
-  }
 
 }

@@ -19,20 +19,20 @@ import java.util.UUID;
 @RequestMapping("/restaurants/address")
 @Tag(name = "Restaurant - Address")
 public class GetRestaurantAddressByIdController {
-  private final GetRestaurantById getRestaurantById;
+    private final GetRestaurantById getRestaurantById;
 
-  public GetRestaurantAddressByIdController(GetRestaurantById getRestaurantById) {
-    this.getRestaurantById = getRestaurantById;
-  }
+    public GetRestaurantAddressByIdController(GetRestaurantById getRestaurantById) {
+        this.getRestaurantById = getRestaurantById;
+    }
 
-  @GetMapping("/{restaurantId}")
-  @Operation(summary = "Get restaurant address by id", description = "Get restaurant address by id from FoodArch.")
-  public ResponseEntity<RestaurantAddressOutput> getRestaurantAddressById(
-      @ParameterObject
-      @PathVariable UUID restaurantId
-  ) {
-    RestaurantAddresses address = getRestaurantById.execute(restaurantId);
+    @GetMapping("/{restaurantId}")
+    @Operation(summary = "Get restaurant address by id", description = "Get restaurant address by id from FoodArch.")
+    public ResponseEntity<RestaurantAddressOutput> getRestaurantAddressById(
+            @ParameterObject
+            @PathVariable UUID restaurantId
+    ) {
+        RestaurantAddresses address = getRestaurantById.execute(restaurantId);
 
-    return ResponseEntity.ok(RestaurantAddressPresenter.restaurantAddressResponse(address));
-  }
+        return ResponseEntity.ok(RestaurantAddressPresenter.restaurantAddressResponse(address));
+    }
 }
