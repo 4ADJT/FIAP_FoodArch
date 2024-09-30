@@ -9,6 +9,6 @@ import java.util.UUID;
 
 public interface IRestaurantAppointmentRepository extends JpaRepository<RestaurantAppointmentEntity, UUID> {
 
-  @Query("SELECT r FROM RestaurantAppointmentEntity r WHERE r.id = ?1")
+  @Query("SELECT r FROM RestaurantAppointmentEntity r WHERE r.id = :appointmentId")
   RestaurantAppointmentEntity findByAppointmentId(UUID appointmentId);
 }

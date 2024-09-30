@@ -21,6 +21,6 @@ public interface IRestaurantTablesRepository extends JpaRepository<RestaurantTab
 
     @Modifying
     @Transactional
-    @Query("UPDATE RestaurantTablesEntity a SET a.available = :isAvailable WHERE a.id = :id")
+    @Query("UPDATE RestaurantTablesEntity a SET a.available = :isAvailable WHERE a.available = :tableId")
     void updateIsAvailableById(UUID tableId, boolean isAvailable);
 }
