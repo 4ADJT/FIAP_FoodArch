@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
+import br.com.fiap.foodarch.domain.entities.restaurants.operatingHour.DayOfWeek;
+
 @Getter
 @Setter
 @NoArgsConstructor

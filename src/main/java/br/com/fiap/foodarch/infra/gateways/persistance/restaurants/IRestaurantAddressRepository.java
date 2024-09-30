@@ -10,4 +10,5 @@ public interface IRestaurantAddressRepository extends JpaRepository<RestaurantAd
 
   @Query("SELECT r FROM RestaurantAddressEntity r WHERE r.restaurant.id = ?1")
   RestaurantAddressEntity findByRestaurantId(UUID restaurantId);
+
 }

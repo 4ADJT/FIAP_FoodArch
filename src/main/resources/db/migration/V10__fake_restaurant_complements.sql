@@ -16,15 +16,15 @@ INSERT INTO operating_hours (id, restaurant_id, day_of_week, open_time, close_ti
 SELECT
     uuid_generate_v4(),
     r.id,
-    dow.day_of_week::day_of_week,  -- Casting para o tipo correto do campo
+    dow.day_of_week::day_of_week_enum,  -- Casting para o tipo correto do campo
     (CASE WHEN RANDOM() > 0.5 THEN '08:00:00' ELSE '09:00:00' END)::TIME,
     (CASE WHEN RANDOM() > 0.5 THEN '18:00:00' ELSE '20:00:00' END)::TIME,
     NOW(),
     NOW()
 FROM restaurants r,
-     (VALUES ('Sunday'::day_of_week), ('Monday'::day_of_week), ('Tuesday'::day_of_week),
-             ('Wednesday'::day_of_week), ('Thursday'::day_of_week), ('Friday'::day_of_week),
-             ('Saturday'::day_of_week)) AS dow(day_of_week);
+     (VALUES ('SUNDAY'::day_of_week_enum), ('MONDAY'::day_of_week_enum), ('TUESDAY'::day_of_week_enum),
+             ('WEDNESDAY'::day_of_week_enum), ('THURSDAY'::day_of_week_enum), ('FRIDAY'::day_of_week_enum),
+             ('SATURDAY'::day_of_week_enum)) AS dow(day_of_week);
 
 -- Inserir cozinhas aleatórias para cada restaurante, com pelo menos uma cozinha e no máximo três
 INSERT INTO restaurant_kitchens (id, restaurant_id, kitchen_id, created_at, updated_at)
