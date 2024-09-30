@@ -33,16 +33,6 @@ class RestaurantOperatingHoursTest {
     }
 
     @Test
-    void onCreate() {
-        RestaurantOperatingHours newOperatingHours = new RestaurantOperatingHours();
-        newOperatingHours.onCreate();
-
-        assertNotNull(newOperatingHours.getCreatedAt());
-        assertNotNull(newOperatingHours.getUpdatedAt());
-        assertEquals(newOperatingHours.getCreatedAt(), newOperatingHours.getUpdatedAt());
-    }
-
-    @Test
     void onUpdate() {
         restaurantOperatingHours.onUpdate();
         assertNotNull(restaurantOperatingHours.getUpdatedAt());

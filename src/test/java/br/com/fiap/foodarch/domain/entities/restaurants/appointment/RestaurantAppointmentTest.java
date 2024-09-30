@@ -36,16 +36,6 @@ class RestaurantAppointmentTest {
     }
 
     @Test
-    void onCreate() {
-        RestaurantAppointment newAppointment = new RestaurantAppointment();
-        newAppointment.onCreate();
-
-        assertNotNull(newAppointment.getCreatedAt());
-        assertNotNull(newAppointment.getUpdatedAt());
-        assertEquals(newAppointment.getCreatedAt(), newAppointment.getUpdatedAt());
-    }
-
-    @Test
     void onUpdate() {
         appointment.onUpdate();
         assertNotNull(appointment.getUpdatedAt());

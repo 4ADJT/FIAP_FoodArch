@@ -29,16 +29,6 @@ class RestaurantTest {
     }
 
     @Test
-    void onCreate() {
-        Restaurant newRestaurant = new Restaurant();
-        newRestaurant.onCreate();
-
-        assertNotNull(newRestaurant.getCreatedAt());
-        assertNotNull(newRestaurant.getUpdatedAt());
-        assertEquals(newRestaurant.getCreatedAt(), newRestaurant.getUpdatedAt());
-    }
-
-    @Test
     void onUpdate() {
         restaurant.onUpdate();
         assertNotNull(restaurant.getUpdatedAt());

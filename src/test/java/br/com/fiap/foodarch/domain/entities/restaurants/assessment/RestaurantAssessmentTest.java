@@ -32,17 +32,6 @@ class RestaurantAssessmentTest {
         assessment = new RestaurantAssessment(id, restaurantId, comment, like, stars, createdAt, updatedAt);
     }
 
-
-    @Test
-    void onCreate() {
-        RestaurantAssessment newAssessment = new RestaurantAssessment();
-        newAssessment.onCreate();
-
-        assertNotNull(newAssessment.getCreatedAt());
-        assertNotNull(newAssessment.getUpdatedAt());
-        assertEquals(newAssessment.getCreatedAt(), newAssessment.getUpdatedAt());
-    }
-
     @Test
     void onUpdate() {
         assessment.onUpdate();

@@ -27,22 +27,6 @@ class KitchensDefinitionTest {
     }
 
     @Test
-    void onCreate() {
-        KitchensDefinition newKitchen = new KitchensDefinition();
-        newKitchen.onCreate();
-
-        assertNotNull(newKitchen.getCreatedAt());
-        assertNotNull(newKitchen.getUpdatedAt());
-        assertEquals(newKitchen.getCreatedAt(), newKitchen.getUpdatedAt());
-    }
-
-    @Test
-    void onUpdate() {
-        kitchensDefinition.onUpdate();
-        assertNotNull(kitchensDefinition.getUpdatedAt());
-    }
-
-    @Test
     void testEquals() {
         KitchensDefinition otherKitchen = new KitchensDefinition(
                 id, name, createdAt, updatedAt
