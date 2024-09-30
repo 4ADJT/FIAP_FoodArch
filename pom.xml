@@ -46,7 +46,7 @@
             target/site/jacoco/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.exclusions>
-            **/*DefaultController*,**/*Mapper*,**/*Repository*,**/*Output*,**/*Input*,**/*Factory*,**/*Presenter*,**/*Entity*,**/*Test*,**/*Inject*,**/*Exception*,**/*ActuatorConfig*,**/*DatabaseHealthCheckService*,**/*RestaurantNotFound*,**/*CepController*,**/*ViaCepService*,**/*FoodarchApplication*,**/Generated*.class,**/infra/gateways/persistence/**/*,**/infra/config/**/*,**/domain/exceptions/**/*
+            **/*DefaultController*,**/*Mapper*,**/*Repository*,**/*Output*,**/*Input*,**/*Factory*,**/*Presenter*,**/*Entity*,**/*Test*,**/*Inject*,**/*Exception*,**/*ActuatorConfig*,**/*DatabaseHealthCheckService*,**/*RestaurantNotFound*,**/*CepController*,**/*ViaCepService*,**/*FoodarchApplication*,**/Generated*.class,**/infra/gateways/persistence/**/*,**/infra/external/restaurants/mv/**/*,**/infra/config/**/*,**/domain/exceptions/**/*
         </sonar.exclusions>
     </properties>
     <dependencies>
@@ -213,6 +213,7 @@
                                 <exclude>**/infra/gateways/persistance/**</exclude>
                                 <exclude>**/infra/config/**</exclude>
                                 <exclude>**/domain/exceptions/**</exclude>
+                                <exclude>**/infra/external/restaurants/mv/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -245,6 +246,7 @@
                                 <exclude>**/infra/gateways/persistance/**</exclude>
                                 <exclude>**/infra/config/**</exclude>
                                 <exclude>**/domain/exceptions/**</exclude>
+                                <exclude>**/infra/external/restaurants/mv/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>
