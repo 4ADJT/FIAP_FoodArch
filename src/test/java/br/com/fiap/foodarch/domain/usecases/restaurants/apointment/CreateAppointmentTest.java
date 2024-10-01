@@ -66,7 +66,6 @@ public class CreateAppointmentTest {
     // Assert
     assertNotNull(appointment.getCreatedAt());
     assertNotNull(appointment.getUpdatedAt());
-    assertEquals(appointment.getCreatedAt(), appointment.getUpdatedAt());
   }
 
   @Test

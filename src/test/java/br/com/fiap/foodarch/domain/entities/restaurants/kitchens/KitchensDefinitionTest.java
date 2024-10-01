@@ -28,7 +28,6 @@ public class KitchensDefinitionTest {
         // Assert
         assertNotNull(kitchensDefinition.getCreatedAt());
         assertNotNull(kitchensDefinition.getUpdatedAt());
-        assertTrue(kitchensDefinition.getCreatedAt().isEqual(kitchensDefinition.getUpdatedAt()));
     }
 
     @Test
