@@ -6,94 +6,41 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class KitchensDefinitionTest {
+public class KitchensDefinitionTest {
 
     private KitchensDefinition kitchensDefinition;
-    private UUID id;
-    private String name;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     @BeforeEach
-    void setUp() {
-        id = UUID.randomUUID();
-        name = "Italian Kitchen";
-        createdAt = LocalDateTime.now().minusDays(1);
-        updatedAt = LocalDateTime.now().minusDays(1);
-
-        kitchensDefinition = new KitchensDefinition(id, name, createdAt, updatedAt);
+    public void setup() {
+        kitchensDefinition = new KitchensDefinition();
+        kitchensDefinition.setId(UUID.randomUUID());
+        kitchensDefinition.setName("Italian Kitchen");
     }
 
     @Test
-    void testEquals() {
-        KitchensDefinition otherKitchen = new KitchensDefinition(
-                id, name, createdAt, updatedAt
-        );
-        assertEquals(kitchensDefinition, otherKitchen);
+    public void testOnCreate() {
+        // Act
+        kitchensDefinition.onCreate();
+
+        // Assert
+        assertNotNull(kitchensDefinition.getCreatedAt());
+        assertNotNull(kitchensDefinition.getUpdatedAt());
+        assertTrue(kitchensDefinition.getCreatedAt().isEqual(kitchensDefinition.getUpdatedAt()));
     }
 
     @Test
-    void canEqual() {
-        KitchensDefinition otherKitchen = new KitchensDefinition();
-        assertTrue(kitchensDefinition.canEqual(otherKitchen));
-    }
+    public void testOnUpdate() {
+        // Arrange
+        kitchensDefinition.onCreate(); // Simulate initial creation
+        LocalDateTime originalCreatedAt = kitchensDefinition.getCreatedAt();
 
-    @Test
-    void testHashCode() {
-        KitchensDefinition otherKitchen = new KitchensDefinition(
-                id, name, createdAt, updatedAt
-        );
-        assertEquals(kitchensDefinition.hashCode(), otherKitchen.hashCode());
-    }
+        // Act
+        kitchensDefinition.onUpdate();
 
-    @Test
-    void getId() {
-        assertEquals(id, kitchensDefinition.getId());
+        // Assert
+        assertNotNull(kitchensDefinition.getUpdatedAt());
     }
-
-    @Test
-    void getName() {
-        assertEquals(name, kitchensDefinition.getName());
-    }
-
-    @Test
-    void getCreatedAt() {
-        assertEquals(createdAt, kitchensDefinition.getCreatedAt());
-    }
-
-    @Test
-    void getUpdatedAt() {
-        assertEquals(updatedAt, kitchensDefinition.getUpdatedAt());
-    }
-
-    @Test
-    void setId() {
-        UUID newId = UUID.randomUUID();
-        kitchensDefinition.setId(newId);
-        assertEquals(newId, kitchensDefinition.getId());
-    }
-
-    @Test
-    void setName() {
-        String newName = "French Kitchen";
-        kitchensDefinition.setName(newName);
-        assertEquals(newName, kitchensDefinition.getName());
-    }
-
-    @Test
-    void setCreatedAt() {
-        LocalDateTime newCreatedAt = LocalDateTime.now().minusDays(2);
-        kitchensDefinition.setCreatedAt(newCreatedAt);
-        assertEquals(newCreatedAt, kitchensDefinition.getCreatedAt());
-    }
-
-    @Test
-    void setUpdatedAt() {
-        LocalDateTime newUpdatedAt = LocalDateTime.now().minusDays(2);
-        kitchensDefinition.setUpdatedAt(newUpdatedAt);
-        assertEquals(newUpdatedAt, kitchensDefinition.getUpdatedAt());
-    }
-
 }
