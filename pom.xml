@@ -148,8 +148,7 @@
             <version>7.18.1</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
+         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.10.2</version>
@@ -191,7 +190,36 @@
             <version>2.18.0</version>
         </dependency>
     </dependencies>
+    <profiles>
+        <profile>
+            <id>cucumber-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.2.5</version>
+                        <configuration>
+                            <includes combine.self="override">
+                                <include>**/*CucumberTest.java</include>
+                            </includes>
 
+                            <excludes combine.self="override">
+                                <exclude>**/*Test.java</exclude>
+                            </excludes>
+
+                            <properties>
+                                <configurationParameters>
+                                    cucumber.junit-platform.naming-strategy=long
+                                </configurationParameters>
+                            </properties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
     <build>
         <plugins>
             <plugin>
@@ -298,8 +326,15 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
-<!--                    <useModulePath>false</useModulePath>-->
-<!--                    <argLine>-Xshare:off</argLine>-->
+
+                    <properties>
+                        <junit.jupiter.extensions.autodetection.enabled>
+                            true
+                        </junit.jupiter.extensions.autodetection.enabled>
+                        <configurationParameters>
+                            cucumber.junit-platform.naming-strategy=long
+                        </configurationParameters>
+                    </properties>
                 </configuration>
             </plugin>
         </plugins>
